@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Complaint</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .track-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .track-btn:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .result h2 {
+            margin-bottom: 15px;
+        }
+
+        .detail {
+            margin: 10px 0;
+        }
+
+        .detail strong {
+            display: inline-block;
+            width: 140px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .error {
+            display: none;
+            margin-top: 15px;
+            color: #c62828;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Track Complaint</h1>
+
+    <p class="subtitle">
+        Enter your Complaint ID to check the current status
+    </p>
+
+    <form id="trackForm">
+
+        <label for="complaintId">Complaint ID</label>
+
+        <input
+            type="text"
+            id="complaintId"
+            placeholder="Eg: CC20261001-001"
+            required
+        >
+
+        <button type="submit" class="track-btn">
+            Track Complaint
+        </button>
+
+    </form>
+
+    <p class="error" id="errorMessage">
+        Complaint not found. Please check your Complaint ID.
+    </p>
+
+    <div class="result" id="result">
+
+        <h2>Complaint Details</h2>
+
+        <div class="detail">
+            <strong>Complaint ID:</strong>
+            <span id="displayId"></span>
+        </div>
+
+        <div class="detail">
+            <strong>Category:</strong>
+            <span id="displayCategory"></span>
+        </div>
+
+        <div class="detail">
+            <strong>Submitted:</strong>
+            <span id="displayDate"></span>
+        </div>
+
+        <div class="detail">
+            <strong>Status:</strong>
+            <span class="status" id="displayStatus"></span>
+        </div>
+
+        <div class="detail">
+            <strong>Last Updated:</strong>
+            <span id="displayUpdated"></span>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.getElementById("trackForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const complaintId =
+            document.getElementById("complaintId").value.trim();
+
+        const result =
+            document.getElementById("result");
+
+        const error =
+            document.getElementById("errorMessage");
+
+        /*
+           Temporary demo data.
+
+           Later, this will be replaced with
+           Firebase/database data.
+        */
+
+        if (complaintId === "CC20261001-001") {
+
+            document.getElementById("displayId").textContent =
+                "CC20261001-001";
+
+            document.getElementById("displayCategory").textContent =
+                "Infrastructure";
+
+            document.getElementById("displayDate").textContent =
+                "01 October 2026";
+
+            document.getElementById("displayStatus").textContent =
+                "In Progress";
+
+            document.getElementById("displayUpdated").textContent =
+                "01 October 2026";
+
+            result.style.display = "block";
+            error.style.display = "none";
+
+        } else {
+
+            result.style.display = "none";
+            error.style.display = "block";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
