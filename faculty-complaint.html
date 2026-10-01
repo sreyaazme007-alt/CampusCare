@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Complaint Registration</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Faculty Complaint</h1>
+    <p class="subtitle">Register your complaint</p>
+
+    <form id="complaintForm">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required>
+
+        <label for="employeeId">Employee ID</label>
+        <input type="text" id="employeeId" required>
+
+        <label for="department">Department</label>
+        <input type="text" id="department" placeholder="Eg: CSE" required>
+
+        <label for="designation">Designation</label>
+        <input type="text" id="designation"
+               placeholder="Eg: Assistant Professor" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+
+        <label for="category">Complaint Category</label>
+        <select id="category" required>
+            <option value="">Select Category</option>
+            <option>Academic</option>
+            <option>Infrastructure</option>
+            <option>IT / Technical</option>
+            <option>Administration</option>
+            <option>Library</option>
+            <option>Transportation</option>
+            <option>Cleanliness</option>
+            <option>Other</option>
+        </select>
+
+        <label for="description">Complaint Description</label>
+        <textarea id="description"
+                  placeholder="Describe your complaint..."
+                  required></textarea>
+
+        <label for="image">Upload Image (Optional)</label>
+        <input type="file" id="image" accept="image/*">
+
+        <button type="submit" class="submit-btn">
+            Register Complaint
+        </button>
+
+    </form>
+
+    <div class="success-message" id="successMessage">
+        Complaint registered successfully!
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("complaintForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        document.getElementById("successMessage").style.display = "block";
+
+        document.getElementById("complaintForm").reset();
+
+    });
+</script>
+
+</body>
+</html>
