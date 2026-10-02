@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Details - Campus Complaint Box</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #222;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: white;
+            color: #222;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #ddd;
+        }
+
+        /* MAIN */
+
+        .main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: #666;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+        /* DETAILS GRID */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .detail {
+            padding: 12px;
+            background: #f7f7f7;
+            border-radius: 7px;
+        }
+
+        .detail-label {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-weight: bold;
+        }
+
+        /* DESCRIPTION */
+
+        .description {
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        /* IMAGE */
+
+        .image-box {
+            width: 100%;
+            min-height: 180px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #777;
+            text-align: center;
+        }
+
+        /* STATUS */
+
+        .current-status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        /* FORM */
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 13px;
+
+            background: #222;
+            color: white;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
+
+        .success-message {
+            display: none;
+
+            margin-top: 15px;
+            padding: 13px;
+
+            background: #e8f5e9;
+            color: #2e7d32;
+
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 15px;
+            }
+
+            .main {
+                padding: 20px 15px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        Campus Complaint Box
+    </div>
+
+    <button class="back-btn" onclick="goBack()">
+        ← Back to Dashboard
+    </button>
+
+</header>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="page-title">
+
+        <h1>Complaint Details</h1>
+
+        <p>
+            View and manage the selected complaint
+        </p>
+
+    </div>
+
+
+    <!-- COMPLAINT INFORMATION -->
+
+    <div class="card">
+
+        <h2>Complaint Information</h2>
+
+        <div class="details-grid">
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Complaint ID
+                </div>
+
+                <div class="detail-value">
+                    CC20261001-001
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Role
+                </div>
+
+                <div class="detail-value">
+                    Student
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Category
+                </div>
+
+                <div class="detail-value">
+                    Infrastructure
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Date Submitted
+                </div>
+
+                <div class="detail-value">
+                    01 October 2026
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Current Status
+                </div>
+
+                <div class="detail-value">
+
+                    <span class="current-status">
+                        Pending
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Last Updated
+                </div>
+
+                <div class="detail-value">
+                    01 October 2026
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPLAINANT INFORMATION -->
+
+    <div class="card">
+
+        <h2>Complainant Information</h2>
+
+        <div class="details-grid">
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Name
+                </div>
+
+                <div class="detail-value">
+                    Student User
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Register Number
+                </div>
+
+                <div class="detail-value">
+                    24CSE001
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Department
+                </div>
+
+                <div class="detail-value">
+                    Computer Science and Engineering
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Semester
+                </div>
+
+                <div class="detail-value">
+                    Semester 3
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Class
+                </div>
+
+                <div class="detail-value">
+                    CSE B
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Phone Number
+                </div>
+
+                <div class="detail-value">
+                    9876543210
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPLAINT DESCRIPTION -->
+
+    <div class="card">
+
+        <h2>Complaint Description</h2>
+
+        <div class="description">
+
+            The projector in the classroom is not working properly.
+            The display becomes disconnected frequently during classes.
+
+        </div>
+
+    </div>
+
+
+    <!-- IMAGE -->
+
+    <div class="card">
+
+        <h2>Uploaded Evidence</h2>
+
+        <div class="image-box">
+
+            No image uploaded for this complaint.
+
+            <!--
+            Later Firebase Storage image will appear here.
+            -->
+
+        </div>
+
+    </div>
+
+
+    <!-- UPDATE -->
+
+    <div class="card">
+
+        <h2>Update Complaint</h2>
+
+        <form id="updateForm">
+
+            <label for="status">
+                Complaint Status
+            </label>
+
+            <select id="status">
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="In Progress">
+                    In Progress
+                </option>
+
+                <option value="Resolved">
+                    Resolved
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <label for="remarks">
+                Authority Remarks
+            </label>
+
+            <textarea
+                id="remarks"
+                placeholder="Enter remarks or action taken..."
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="save-btn"
+            >
+                Save Changes
+            </button>
+
+        </form>
+
+
+        <div
+            class="success-message"
+            id="successMessage"
+        >
+            Complaint updated successfully!
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* BACK TO DASHBOARD */
+
+    function goBack() {
+
+        window.location.href =
+            "authority-dashboard.html";
+
+    }
+
+
+    /* UPDATE COMPLAINT */
+
+    document
+        .getElementById("updateForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const status =
+                document.getElementById("status").value;
+
+            const remarks =
+                document.getElementById("remarks").value;
+
+
+            /*
+                Temporary frontend behavior.
+
+                Later:
+                Firebase will save the status,
+                remarks and updated date.
+            */
+
+            console.log("New Status:", status);
+            console.log("Authority Remarks:", remarks);
+
+
+            document
+                .getElementById("successMessage")
+                .style.display = "block";
+
+        });
+
+</script>
+
+</body>
+</html>
