@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusCare | Select User Type</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8fc;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* Header */
+
+        header {
+            background: #173b67;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #9fd3ff;
+        }
+
+        .home-btn {
+            color: white;
+            text-decoration: none;
+            border: 1px solid #c9d9ec;
+            padding: 9px 17px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .home-btn:hover {
+            background: white;
+            color: #173b67;
+        }
+
+        /* Main */
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            padding: 55px 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .heading h1 {
+            color: #173b67;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .heading p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Cards */
+
+        .role-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .role-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px 22px;
+            text-align: center;
+            text-decoration: none;
+            color: #1e293b;
+            box-shadow: 0 5px 18px rgba(23, 59, 103, 0.06);
+            transition: 0.25s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-6px);
+            border-color: #9fc5eb;
+            box-shadow: 0 10px 25px rgba(23, 59, 103, 0.12);
+        }
+
+        .icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            background: #eaf3ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .role-card h2 {
+            color: #173b67;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .role-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .select-text {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563a6;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Help */
+
+        .help {
+            margin-top: 45px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 750px) {
+
+            .role-container {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: auto;
+            }
+
+            .heading h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">
+            Campus<span>Care</span>
+        </div>
+
+        <a href="index.html" class="home-btn">
+            ← Home
+        </a>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="container">
+
+        <section class="heading">
+
+            <h1>Select Your Role</h1>
+
+            <p>
+                Please select your role to continue with
+                complaint registration.
+            </p>
+
+        </section>
+
+
+        <!-- Role Cards -->
+
+        <section class="role-container">
+
+
+            <!-- Student -->
+
+            <a href="student-form.html" class="role-card">
+
+                <div class="icon">
+                    🎓
+                </div>
+
+                <h2>Student</h2>
+
+                <p>
+                    For students who want to report
+                    a campus-related issue.
+                </p>
+
+                <span class="select-text">
+                    Continue →
+                </span>
+
+            </a>
+
+
+            <!-- Faculty -->
+
+            <a href="faculty-form.html" class="role-card">
+
+                <div class="icon">
+                    👨‍🏫
+                </div>
+
+                <h2>Faculty</h2>
+
+                <p>
+                    For teaching staff who want to
+                    report a campus-related issue.
+                </p>
+
+                <span class="select-text">
+                    Continue →
+                </span>
+
+            </a>
+
+
+            <!-- Non-Faculty -->
+
+            <a href="nonfaculty-form.html" class="role-card">
+
+                <div class="icon">
+                    👥
+                </div>
+
+                <h2>Non-Faculty</h2>
+
+                <p>
+                    For non-teaching staff and other
+                    campus staff members.
+                </p>
+
+                <span class="select-text">
+                    Continue →
+                </span>
+
+            </a>
+
+
+        </section>
+
+
+        <div class="help">
+            Need help? Select the role that matches your position
+            in the campus.
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        CampusCare | Campus Complaint Box
+
+    </footer>
+
+</body>
+
+  </html>
