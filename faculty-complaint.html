@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Faculty Complaint Registration</title>
 
     <style>
@@ -84,12 +85,28 @@
             opacity: 0.9;
         }
 
+        .submit-btn:disabled {
+            background: #777;
+            cursor: not-allowed;
+        }
+
         .success-message {
             display: none;
             margin-top: 20px;
             padding: 15px;
             background: #e8f5e9;
             color: #2e7d32;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffebee;
+            color: #c62828;
             border-radius: 8px;
             text-align: center;
             font-weight: bold;
@@ -102,29 +119,68 @@
 <div class="container">
 
     <h1>Faculty Complaint</h1>
-    <p class="subtitle">Register your complaint</p>
+
+    <p class="subtitle">
+        Register your complaint
+    </p>
 
     <form id="complaintForm">
 
         <label for="name">Full Name</label>
-        <input type="text" id="name" required>
+
+        <input
+            type="text"
+            id="name"
+            required
+        >
+
 
         <label for="employeeId">Employee ID</label>
-        <input type="text" id="employeeId" required>
+
+        <input
+            type="text"
+            id="employeeId"
+            required
+        >
+
 
         <label for="department">Department</label>
-        <input type="text" id="department" placeholder="Eg: CSE" required>
+
+        <input
+            type="text"
+            id="department"
+            placeholder="Eg: CSE"
+            required
+        >
+
 
         <label for="designation">Designation</label>
-        <input type="text" id="designation"
-               placeholder="Eg: Assistant Professor" required>
+
+        <input
+            type="text"
+            id="designation"
+            placeholder="Eg: Assistant Professor"
+            required
+        >
+
 
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" required>
+
+        <input
+            type="tel"
+            id="phone"
+            required
+        >
+
 
         <label for="category">Complaint Category</label>
+
         <select id="category" required>
-            <option value="">Select Category</option>
+
+            <option value="">
+                Select Category
+            </option>
+
             <option>Academic</option>
             <option>Infrastructure</option>
             <option>IT / Technical</option>
@@ -133,38 +189,265 @@
             <option>Transportation</option>
             <option>Cleanliness</option>
             <option>Other</option>
+
         </select>
 
-        <label for="description">Complaint Description</label>
-        <textarea id="description"
-                  placeholder="Describe your complaint..."
-                  required></textarea>
 
-        <label for="image">Upload Image (Optional)</label>
-        <input type="file" id="image" accept="image/*">
+        <label for="description">
+            Complaint Description
+        </label>
 
-        <button type="submit" class="submit-btn">
+        <textarea
+            id="description"
+            placeholder="Describe your complaint..."
+            required
+        ></textarea>
+
+
+        <label for="image">
+            Upload Image (Optional)
+        </label>
+
+        <input
+            type="file"
+            id="image"
+            accept="image/*"
+        >
+
+
+        <button
+            type="submit"
+            class="submit-btn"
+            id="submitButton"
+        >
             Register Complaint
         </button>
 
     </form>
 
-    <div class="success-message" id="successMessage">
+
+    <div
+        class="success-message"
+        id="successMessage"
+    >
         Complaint registered successfully!
+    </div>
+
+
+    <div
+        class="error-message"
+        id="errorMessage"
+    >
+        Failed to register complaint. Please try again.
     </div>
 
 </div>
 
-<script>
-    document.getElementById("complaintForm").addEventListener("submit", function(event) {
 
-        event.preventDefault();
+<script type="module">
 
-        document.getElementById("successMessage").style.display = "block";
+    /* ============================
+       FIREBASE
+    ============================ */
 
-        document.getElementById("complaintForm").reset();
+    import { db } from "./firebase-config.js";
 
-    });
+    import {
+        collection,
+        addDoc,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+    /* ============================
+       HTML ELEMENTS
+    ============================ */
+
+    const complaintForm =
+        document.getElementById("complaintForm");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const submitButton =
+        document.getElementById("submitButton");
+
+
+    /* ============================
+       SUBMIT FORM
+    ============================ */
+
+    complaintForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            console.log("FACULTY FORM SUBMITTED");
+
+
+            /* Hide old messages */
+
+            successMessage.style.display =
+                "none";
+
+            errorMessage.style.display =
+                "none";
+
+
+            /* Disable button */
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Registering...";
+
+
+            try {
+
+                /* ============================
+                   GET VALUES
+                ============================ */
+
+                const name =
+                    document.getElementById("name")
+                    .value.trim();
+
+                const employeeId =
+                    document.getElementById("employeeId")
+                    .value.trim();
+
+                const department =
+                    document.getElementById("department")
+                    .value.trim();
+
+                const designation =
+                    document.getElementById("designation")
+                    .value.trim();
+
+                const phone =
+                    document.getElementById("phone")
+                    .value.trim();
+
+                const category =
+                    document.getElementById("category")
+                    .value;
+
+                const description =
+                    document.getElementById("description")
+                    .value.trim();
+
+
+                /* ============================
+                   COMPLAINT DATA
+                ============================ */
+
+                const complaintData = {
+
+                    role: "Faculty",
+
+                    name: name,
+
+                    employeeId: employeeId,
+
+                    department: department,
+
+                    designation: designation,
+
+                    phone: phone,
+
+                    category: category,
+
+                    description: description,
+
+                    status: "Pending",
+
+                    createdAt:
+                        serverTimestamp()
+                };
+
+
+                /* ============================
+                   SAVE TO FIRESTORE
+                ============================ */
+
+                const complaintRef =
+                    await addDoc(
+                        collection(
+                            db,
+                            "complaints"
+                        ),
+                        complaintData
+                    );
+
+
+                console.log(
+                    "Faculty complaint saved with ID:",
+                    complaintRef.id
+                );
+
+
+                /* ============================
+                   SUCCESS
+                ============================ */
+
+                successMessage.style.display =
+                    "block";
+
+                complaintForm.reset();
+
+
+                submitButton.textContent =
+                    "Complaint Registered";
+
+
+                successMessage.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+
+                /* Reset button after 3 seconds */
+
+                setTimeout(function() {
+
+                    successMessage.style.display =
+                        "none";
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "Register Complaint";
+
+                }, 3000);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error registering faculty complaint:",
+                    error
+                );
+
+
+                errorMessage.style.display =
+                    "block";
+
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "Register Complaint";
+
+            }
+
+        }
+    );
+
 </script>
 
 </body>
