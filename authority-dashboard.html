@@ -19,10 +19,9 @@
             color: #222;
         }
 
-        /* ---------- HEADER ---------- */
-
+        /* HEADER */
         header {
-            background: #222;
+            background: #1f3c88;
             color: white;
             padding: 18px 30px;
             display: flex;
@@ -31,135 +30,128 @@
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
         }
 
-        .header-right {
+        .authority-panel {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
-        .authority-name {
+        .authority-text {
             font-size: 14px;
         }
 
-        .logout-btn {
+        #logoutButton {
             background: white;
-            color: #222;
+            color: #1f3c88;
             border: none;
-            padding: 9px 16px;
-            border-radius: 7px;
+            padding: 9px 18px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
         }
 
-        .logout-btn:hover {
-            background: #ddd;
+        #logoutButton:hover {
+            background: #e9eefc;
         }
 
-        /* ---------- MAIN ---------- */
-
-        .main {
-            max-width: 1300px;
-            margin: auto;
-            padding: 30px;
+        /* MAIN */
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
         }
 
-        .welcome {
-            margin-bottom: 25px;
+        .page-title {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #1f3c88;
         }
 
-        .welcome h1 {
-            margin-bottom: 5px;
-        }
-
-        .welcome p {
-            color: #666;
-        }
-
-        /* ---------- ALERT ---------- */
-
-        .alert-box {
-            background: #fff8e1;
-            border-left: 5px solid #f0ad00;
+        /* ALERT */
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffe69c;
+            color: #664d03;
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 25px;
+            display: none;
         }
 
-        .alert-box strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* ---------- STAT CARDS ---------- */
-
+        /* STATISTICS */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+            gap: 20px;
             margin-bottom: 30px;
         }
 
-        .card {
+        .stat-card {
             background: white;
             padding: 22px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
         }
 
-        .card-title {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 10px;
+        .stat-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #555;
         }
 
-        .card-number {
-            font-size: 30px;
+        .stat-number {
+            font-size: 32px;
             font-weight: bold;
+            color: #1f3c88;
         }
 
-        /* ---------- COMPLAINT SECTION ---------- */
-
-        .complaint-section {
+        /* FILTER SECTION */
+        .filter-section {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
         }
 
-        .section-title {
-            margin-bottom: 20px;
+        .filter-section h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
         }
 
-        /* ---------- SEARCH & FILTER ---------- */
-
-        .controls {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
         }
 
-        .controls input,
-        .controls select {
-            padding: 11px;
+        .filters input,
+        .filters select {
+            width: 100%;
+            padding: 12px;
             border: 1px solid #ccc;
-            border-radius: 7px;
+            border-radius: 6px;
             font-size: 14px;
         }
 
-        .search-box {
-            flex: 1;
-            min-width: 220px;
+        /* TABLE */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow-x: auto;
         }
 
-        /* ---------- TABLE ---------- */
-
-        .table-container {
-            overflow-x: auto;
+        .table-container h2 {
+            margin-bottom: 18px;
+            font-size: 20px;
         }
 
         table {
@@ -168,28 +160,30 @@
             min-width: 850px;
         }
 
-        th,
-        td {
-            padding: 13px 10px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
         th {
-            background: #f5f5f5;
+            background: #1f3c88;
+            color: white;
+            padding: 13px;
+            text-align: left;
             font-size: 14px;
         }
 
         td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
             font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f7f9fc;
         }
 
         .status {
-            display: inline-block;
             padding: 6px 10px;
-            border-radius: 15px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
+            display: inline-block;
         }
 
         .pending {
@@ -198,131 +192,194 @@
         }
 
         .progress {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: #cfe2ff;
+            color: #084298;
         }
 
         .resolved {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: #d1e7dd;
+            color: #0f5132;
         }
 
-        .view-btn {
-            background: #222;
+        .view-button {
+            background: #1f3c88;
             color: white;
             border: none;
             padding: 7px 12px;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .view-btn:hover {
-            opacity: 0.85;
+        .view-button:hover {
+            background: #162e69;
         }
 
-        /* ---------- MODAL ---------- */
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
 
+        .loading-message {
+            text-align: center;
+            padding: 30px;
+            color: #1f3c88;
+            font-weight: bold;
+        }
+
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
-            inset: 0;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.55);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            overflow-y: auto;
         }
 
         .modal-content {
             background: white;
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
+            width: 90%;
+            max-width: 700px;
+            margin: 50px auto;
+            border-radius: 10px;
             padding: 25px;
-            border-radius: 12px;
+            position: relative;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 25px;
+        .close-button {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
             cursor: pointer;
+            color: #555;
         }
 
-        .detail {
-            margin-bottom: 13px;
+        .close-button:hover {
+            color: black;
         }
 
-        .detail strong {
-            display: inline-block;
-            width: 150px;
+        .modal-title {
+            color: #1f3c88;
+            margin-bottom: 20px;
+            padding-right: 30px;
         }
 
-        .description {
-            background: #f5f5f5;
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail-box {
+            background: #f5f6f8;
             padding: 12px;
-            border-radius: 7px;
-            margin-top: 7px;
+            border-radius: 6px;
+        }
+
+        .detail-box.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            word-break: break-word;
         }
 
         .update-section {
-            margin-top: 20px;
+            margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid #ddd;
         }
 
-        .update-section select {
+        .update-section h3 {
+            margin-bottom: 12px;
+        }
+
+        #newStatus {
             width: 100%;
             padding: 11px;
             border: 1px solid #ccc;
-            border-radius: 7px;
-            margin: 10px 0;
+            border-radius: 6px;
+            margin-bottom: 12px;
         }
 
-        .update-btn {
-            width: 100%;
-            padding: 12px;
-            background: #222;
+        #updateStatusButton {
+            background: #1f3c88;
             color: white;
             border: none;
-            border-radius: 7px;
+            padding: 11px 20px;
+            border-radius: 6px;
             cursor: pointer;
         }
 
-        /* ---------- RESPONSIVE ---------- */
+        #updateStatusButton:hover {
+            background: #162e69;
+        }
 
-        @media (max-width: 900px) {
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-box.full {
+                grid-column: auto;
+            }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 500px) {
             header {
                 padding: 15px;
             }
 
-            .main {
-                padding: 20px 15px;
+            .logo {
+                font-size: 18px;
+            }
+
+            .authority-text {
+                display: none;
+            }
+
+            .container {
+                width: 95%;
+                margin: 20px auto;
+            }
+
+            .page-title {
+                font-size: 24px;
             }
 
             .stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
             }
 
-            .header-right {
-                gap: 8px;
+            .stat-card {
+                padding: 15px;
             }
 
-            .authority-name {
-                display: none;
+            .stat-number {
+                font-size: 25px;
             }
         }
     </style>
@@ -330,295 +387,114 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Campus Complaint Box</div>
 
-<header>
-
-    <div class="logo">
-        Campus Complaint Box
-    </div>
-
-    <div class="header-right">
-
-        <span class="authority-name">
-            Authority Panel
-        </span>
-
-        <button class="logout-btn" onclick="logout()">
-            Logout
-        </button>
-
-    </div>
-
-</header>
+        <div class="authority-panel">
+            <div class="authority-text">Authority Panel</div>
+            <button id="logoutButton">Logout</button>
+        </div>
+    </header>
 
 
-<!-- ================= MAIN ================= -->
+    <!-- MAIN CONTENT -->
+    <div class="container">
 
-<div class="main">
+        <h1 class="page-title">Authority Dashboard</h1>
 
-    <div class="welcome">
-
-        <h1>Authority Dashboard</h1>
-
-        <p>
-            Monitor and manage campus complaints
-        </p>
-
-    </div>
+        <div id="alertMessage" class="alert"></div>
 
 
-    <!-- ================= ALERT ================= -->
+        <!-- STATISTICS -->
+        <div class="stats">
 
-    <div class="alert-box">
-
-        <strong>New Complaint Alert</strong>
-
-        <span id="alertText">
-            3 new complaints require attention.
-        </span>
-
-    </div>
-
-
-    <!-- ================= STATISTICS ================= -->
-
-    <div class="stats">
-
-        <div class="card">
-
-            <div class="card-title">
-                Total Complaints
+            <div class="stat-card">
+                <h3>Total Complaints</h3>
+                <div id="totalCount" class="stat-number">0</div>
             </div>
 
-            <div class="card-number" id="totalCount">
-                24
+            <div class="stat-card">
+                <h3>Pending</h3>
+                <div id="pendingCount" class="stat-number">0</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>In Progress</h3>
+                <div id="progressCount" class="stat-number">0</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Resolved</h3>
+                <div id="resolvedCount" class="stat-number">0</div>
             </div>
 
         </div>
 
 
-        <div class="card">
+        <!-- FILTERS -->
+        <div class="filter-section">
 
-            <div class="card-title">
-                Pending
+            <h2>Search & Filter Complaints</h2>
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by Complaint ID or Name..."
+                >
+
+                <select id="statusFilter">
+                    <option value="All">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+                <select id="categoryFilter">
+                    <option value="All">All Categories</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="IT / Technical">IT / Technical</option>
+                    <option value="Administration">Administration</option>
+                    <option value="Library">Library</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Cleanliness">Cleanliness</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Security">Security</option>
+                    <option value="Other">Other</option>
+                </select>
+
             </div>
-
-            <div class="card-number" id="pendingCount">
-                8
-            </div>
-
         </div>
 
 
-        <div class="card">
-
-            <div class="card-title">
-                In Progress
-            </div>
-
-            <div class="card-number" id="progressCount">
-                6
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-title">
-                Resolved
-            </div>
-
-            <div class="card-number" id="resolvedCount">
-                10
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================= COMPLAINTS ================= -->
-
-    <div class="complaint-section">
-
-        <h2 class="section-title">
-            Complaint Management
-        </h2>
-
-
-        <!-- SEARCH AND FILTER -->
-
-        <div class="controls">
-
-            <input
-                type="text"
-                id="searchInput"
-                class="search-box"
-                placeholder="Search Complaint ID..."
-                onkeyup="filterComplaints()"
-            >
-
-            <select
-                id="statusFilter"
-                onchange="filterComplaints()"
-            >
-
-                <option value="All">
-                    All Status
-                </option>
-
-                <option value="Pending">
-                    Pending
-                </option>
-
-                <option value="In Progress">
-                    In Progress
-                </option>
-
-                <option value="Resolved">
-                    Resolved
-                </option>
-
-            </select>
-
-
-            <select
-                id="categoryFilter"
-                onchange="filterComplaints()"
-            >
-
-                <option value="All">
-                    All Categories
-                </option>
-
-                <option value="Infrastructure">
-                    Infrastructure
-                </option>
-
-                <option value="Academic">
-                    Academic
-                </option>
-
-                <option value="Cleanliness">
-                    Cleanliness
-                </option>
-
-                <option value="IT / Technical">
-                    IT / Technical
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <!-- TABLE -->
-
+        <!-- COMPLAINT TABLE -->
         <div class="table-container">
+
+            <h2>Complaint Management</h2>
 
             <table>
 
                 <thead>
-
                     <tr>
-
                         <th>Complaint ID</th>
+                        <th>Name</th>
                         <th>Role</th>
                         <th>Category</th>
-                        <th>Date</th>
                         <th>Status</th>
+                        <th>Submitted Time</th>
                         <th>Action</th>
-
                     </tr>
-
                 </thead>
 
-
-                <tbody id="complaintTable">
-
-                    <tr>
-
-                        <td>CC20261001-001</td>
-
-                        <td>Student</td>
-
-                        <td>Infrastructure</td>
-
-                        <td>01 Oct 2026</td>
-
-                        <td>
-                            <span class="status pending">
-                                Pending
-                            </span>
-                        </td>
-
-                        <td>
-                            <button
-                                class="view-btn"
-                                onclick="viewComplaint(0)"
-                            >
-                                View
-                            </button>
-                        </td>
-
-                    </tr>
-
+                <tbody id="complaintsTableBody">
 
                     <tr>
-
-                        <td>CC20261001-002</td>
-
-                        <td>Faculty</td>
-
-                        <td>IT / Technical</td>
-
-                        <td>01 Oct 2026</td>
-
-                        <td>
-                            <span class="status progress">
-                                In Progress
-                            </span>
+                        <td colspan="7" class="loading-message">
+                            Loading complaints...
                         </td>
-
-                        <td>
-                            <button
-                                class="view-btn"
-                                onclick="viewComplaint(1)"
-                            >
-                                View
-                            </button>
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>CC20261001-003</td>
-
-                        <td>Non-Faculty</td>
-
-                        <td>Cleanliness</td>
-
-                        <td>30 Sep 2026</td>
-
-                        <td>
-                            <span class="status resolved">
-                                Resolved
-                            </span>
-                        </td>
-
-                        <td>
-                            <button
-                                class="view-btn"
-                                onclick="viewComplaint(2)"
-                            >
-                                View
-                            </button>
-                        </td>
-
                     </tr>
 
                 </tbody>
@@ -629,332 +505,830 @@
 
     </div>
 
-</div>
 
+    <!-- VIEW COMPLAINT MODAL -->
+    <div id="complaintModal" class="modal">
 
-<!-- ================= COMPLAINT DETAILS MODAL ================= -->
+        <div class="modal-content">
 
-<div class="modal" id="complaintModal">
+            <span id="closeModalButton" class="close-button">&times;</span>
 
-    <div class="modal-content">
+            <h2 class="modal-title">Complaint Details</h2>
 
-        <div class="modal-header">
+            <div id="complaintDetails" class="details"></div>
 
-            <h2>
-                Complaint Details
-            </h2>
+            <div class="update-section">
 
-            <button
-                class="close-btn"
-                onclick="closeModal()"
-            >
-                &times;
-            </button>
+                <h3>Update Complaint Status</h3>
 
-        </div>
+                <select id="newStatus">
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
 
+                <button id="updateStatusButton">
+                    Update Status
+                </button>
 
-        <div class="detail">
-
-            <strong>Complaint ID:</strong>
-
-            <span id="detailId"></span>
-
-        </div>
-
-
-        <div class="detail">
-
-            <strong>Complainant:</strong>
-
-            <span id="detailName"></span>
-
-        </div>
-
-
-        <div class="detail">
-
-            <strong>Role:</strong>
-
-            <span id="detailRole"></span>
-
-        </div>
-
-
-        <div class="detail">
-
-            <strong>Category:</strong>
-
-            <span id="detailCategory"></span>
-
-        </div>
-
-
-        <div class="detail">
-
-            <strong>Phone:</strong>
-
-            <span id="detailPhone"></span>
-
-        </div>
-
-
-        <div class="detail">
-
-            <strong>Date Submitted:</strong>
-
-            <span id="detailDate"></span>
-
-        </div>
-
-
-        <div class="detail">
-
-            <strong>Description:</strong>
-
-            <div class="description" id="detailDescription"></div>
-
-        </div>
-
-
-        <!-- STATUS UPDATE -->
-
-        <div class="update-section">
-
-            <h3>
-                Update Complaint Status
-            </h3>
-
-            <select id="newStatus">
-
-                <option value="Pending">
-                    Pending
-                </option>
-
-                <option value="In Progress">
-                    In Progress
-                </option>
-
-                <option value="Resolved">
-                    Resolved
-                </option>
-
-            </select>
-
-
-            <button
-                class="update-btn"
-                onclick="updateStatus()"
-            >
-                Update Status
-            </button>
+            </div>
 
         </div>
 
     </div>
 
-</div>
+
+    <!-- FIREBASE + DASHBOARD JAVASCRIPT -->
+    <script type="module">
+
+        console.log("DASHBOARD SCRIPT STARTED");
 
 
-<script>
+        /* FIREBASE IMPORT */
 
-    /* ================= SAMPLE DATA ================= */
+        import { db } from "./firebase-config.js";
 
-    const complaints = [
-
-        {
-            id: "CC20261001-001",
-            name: "Student User",
-            role: "Student",
-            category: "Infrastructure",
-            phone: "9876543210",
-            date: "01 Oct 2026",
-            status: "Pending",
-            description:
-                "The classroom projector is not working properly."
-        },
-
-        {
-            id: "CC20261001-002",
-            name: "Faculty User",
-            role: "Faculty",
-            category: "IT / Technical",
-            phone: "9876543211",
-            date: "01 Oct 2026",
-            status: "In Progress",
-            description:
-                "The computer system in the department is not functioning."
-        },
-
-        {
-            id: "CC20261001-003",
-            name: "Non-Faculty User",
-            role: "Non-Faculty",
-            category: "Cleanliness",
-            phone: "9876543212",
-            date: "30 Sep 2026",
-            status: "Resolved",
-            description:
-                "The common area requires regular cleaning."
-        }
-
-    ];
+        import {
+            collection,
+            getDocs,
+            updateDoc,
+            doc
+        } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-    let selectedComplaint = null;
+        console.log("Firebase modules imported successfully");
 
 
-    /* ================= VIEW COMPLAINT ================= */
+        /* VARIABLES */
 
-    function viewComplaint(index) {
-
-        selectedComplaint = complaints[index];
-
-        document.getElementById("detailId").textContent =
-            selectedComplaint.id;
-
-        document.getElementById("detailName").textContent =
-            selectedComplaint.name;
-
-        document.getElementById("detailRole").textContent =
-            selectedComplaint.role;
-
-        document.getElementById("detailCategory").textContent =
-            selectedComplaint.category;
-
-        document.getElementById("detailPhone").textContent =
-            selectedComplaint.phone;
-
-        document.getElementById("detailDate").textContent =
-            selectedComplaint.date;
-
-        document.getElementById("detailDescription").textContent =
-            selectedComplaint.description;
-
-        document.getElementById("newStatus").value =
-            selectedComplaint.status;
-
-        document.getElementById("complaintModal").style.display =
-            "flex";
-    }
+        let complaints = [];
+        let selectedComplaint = null;
 
 
-    /* ================= CLOSE MODAL ================= */
+        /* HTML ELEMENTS */
 
-    function closeModal() {
+        const complaintsTableBody =
+            document.getElementById("complaintsTableBody");
 
-        document.getElementById("complaintModal").style.display =
-            "none";
-    }
+        const totalCount =
+            document.getElementById("totalCount");
 
+        const pendingCount =
+            document.getElementById("pendingCount");
 
-    /* ================= UPDATE STATUS ================= */
+        const progressCount =
+            document.getElementById("progressCount");
 
-    function updateStatus() {
+        const resolvedCount =
+            document.getElementById("resolvedCount");
 
-        if (!selectedComplaint) {
-            return;
-        }
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const statusFilter =
+            document.getElementById("statusFilter");
+
+        const categoryFilter =
+            document.getElementById("categoryFilter");
+
+        const complaintModal =
+            document.getElementById("complaintModal");
+
+        const closeModalButton =
+            document.getElementById("closeModalButton");
+
+        const complaintDetails =
+            document.getElementById("complaintDetails");
 
         const newStatus =
-            document.getElementById("newStatus").value;
+            document.getElementById("newStatus");
 
-        selectedComplaint.status = newStatus;
+        const updateStatusButton =
+            document.getElementById("updateStatusButton");
 
-        alert(
-            "Complaint " +
-            selectedComplaint.id +
-            " status updated to " +
-            newStatus
-        );
+        const logoutButton =
+            document.getElementById("logoutButton");
 
-        closeModal();
-
-        updateStatistics();
-
-    }
+        const alertMessage =
+            document.getElementById("alertMessage");
 
 
-    /* ================= SEARCH & FILTER ================= */
+        /* LOAD COMPLAINTS */
 
-    function filterComplaints() {
+        async function loadComplaints() {
 
-        const search =
-            document.getElementById("searchInput")
-            .value
-            .toLowerCase();
+            console.log("Connecting to Firestore...");
 
-        const status =
-            document.getElementById("statusFilter")
-            .value;
+            complaintsTableBody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="loading-message">
+                        Loading complaints from Firebase...
+                    </td>
+                </tr>
+            `;
 
-        const category =
-            document.getElementById("categoryFilter")
-            .value;
+            try {
 
-        const rows =
-            document.querySelectorAll("#complaintTable tr");
+                const snapshot =
+                    await getDocs(collection(db, "complaints"));
+
+                complaints = [];
+
+                snapshot.forEach((documentSnapshot) => {
+
+                    complaints.push({
+                        id: documentSnapshot.id,
+                        ...documentSnapshot.data()
+                    });
+
+                });
+
+                console.log(
+                    "Complaints loaded:",
+                    complaints
+                );
+
+                displayComplaints(complaints);
+
+                updateStatistics();
+
+                updateAlert();
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading complaints:",
+                    error
+                );
+
+                complaintsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty-message">
+                            Unable to load complaints.
+                            <br><br>
+                            Check Firebase connection and Firestore rules.
+                        </td>
+                    </tr>
+                `;
+
+                alertMessage.style.display = "block";
+
+                alertMessage.textContent =
+                    "Error connecting to Firebase. Open the browser console to see the exact error.";
+
+            }
+
+        }
 
 
-        rows.forEach((row, index) => {
+        /* DISPLAY COMPLAINTS */
 
-            const complaint =
-                complaints[index];
+        function displayComplaints(list) {
 
-            if (!complaint) {
+            complaintsTableBody.innerHTML = "";
+
+            if (list.length === 0) {
+
+                complaintsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty-message">
+                            No complaints found.
+                        </td>
+                    </tr>
+                `;
+
                 return;
             }
 
-            const matchesSearch =
-                complaint.id
-                .toLowerCase()
-                .includes(search);
 
-            const matchesStatus =
-                status === "All" ||
-                complaint.status === status;
+            list.forEach((complaint) => {
 
-            const matchesCategory =
-                category === "All" ||
-                complaint.category === category;
+                const row =
+                    document.createElement("tr");
 
 
-            if (
-                matchesSearch &&
-                matchesStatus &&
-                matchesCategory
-            ) {
+                const idCell =
+                    document.createElement("td");
 
-                row.style.display = "";
+                idCell.textContent =
+                    complaint.id || "N/A";
+
+
+                const nameCell =
+                    document.createElement("td");
+
+                nameCell.textContent =
+                    complaint.name || "N/A";
+
+
+                const roleCell =
+                    document.createElement("td");
+
+                roleCell.textContent =
+                    complaint.role || "N/A";
+
+
+                const categoryCell =
+                    document.createElement("td");
+
+                categoryCell.textContent =
+                    complaint.category || "N/A";
+
+
+                const statusCell =
+                    document.createElement("td");
+
+                const status =
+                    complaint.status || "Pending";
+
+                const statusSpan =
+                    document.createElement("span");
+
+                statusSpan.textContent = status;
+
+                statusSpan.classList.add("status");
+
+
+                if (status === "Pending") {
+
+                    statusSpan.classList.add("pending");
+
+                } else if (status === "In Progress") {
+
+                    statusSpan.classList.add("progress");
+
+                } else if (status === "Resolved") {
+
+                    statusSpan.classList.add("resolved");
+
+                }
+
+
+                statusCell.appendChild(statusSpan);
+
+
+                const timeCell =
+                    document.createElement("td");
+
+                timeCell.textContent =
+                    formatDate(complaint.createdAt);
+
+
+                const actionCell =
+                    document.createElement("td");
+
+                const viewButton =
+                    document.createElement("button");
+
+                viewButton.textContent = "View";
+
+                viewButton.className = "view-button";
+
+                viewButton.addEventListener(
+                    "click",
+                    () => viewComplaint(complaint)
+                );
+
+
+                actionCell.appendChild(viewButton);
+
+
+                row.appendChild(idCell);
+                row.appendChild(nameCell);
+                row.appendChild(roleCell);
+                row.appendChild(categoryCell);
+                row.appendChild(statusCell);
+                row.appendChild(timeCell);
+                row.appendChild(actionCell);
+
+
+                complaintsTableBody.appendChild(row);
+
+            });
+
+        }
+
+
+        /* FORMAT DATE */
+
+        function formatDate(timestamp) {
+
+            if (!timestamp) {
+                return "Not available";
+            }
+
+            try {
+
+                if (
+                    timestamp &&
+                    typeof timestamp.toDate === "function"
+                ) {
+
+                    return timestamp.toDate().toLocaleString();
+
+                }
+
+                return new Date(timestamp).toLocaleString();
+
+            } catch (error) {
+
+                return "Not available";
+
+            }
+
+        }
+
+
+        /* UPDATE STATISTICS */
+        function updateStatistics() {
+
+            const total =
+                complaints.length;
+
+            const pending =
+                complaints.filter(
+                    complaint =>
+                        (complaint.status || "Pending") === "Pending"
+                ).length;
+
+            const progress =
+                complaints.filter(
+                    complaint =>
+                        complaint.status === "In Progress"
+                ).length;
+
+            const resolved =
+                complaints.filter(
+                    complaint =>
+                        complaint.status === "Resolved"
+                ).length;
+
+
+            totalCount.textContent = total;
+
+            pendingCount.textContent = pending;
+
+            progressCount.textContent = progress;
+
+            resolvedCount.textContent = resolved;
+
+        }
+
+
+        /* ALERT */
+
+        function updateAlert() {
+
+            const pending =
+                complaints.filter(
+                    complaint =>
+                        (complaint.status || "Pending") === "Pending"
+                ).length;
+
+
+            if (pending > 0) {
+
+                alertMessage.style.display = "block";
+
+                alertMessage.textContent =
+                    pending +
+                    " complaint(s) require attention.";
 
             } else {
 
-                row.style.display = "none";
+                alertMessage.style.display = "none";
 
             }
 
-        });
-
-    }
+        }
 
 
-    /* ================= UPDATE STATISTICS ================= */
+        /* FILTER */
 
-    function updateStatistics() {
+        function filterComplaints() {
 
-        let pending = 0;
-        let progress = 0;
-        let resolved = 0;
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+            const selectedStatus =
+                statusFilter.value;
+
+            const selectedCategory =
+                categoryFilter.value;
 
 
-        complaints.forEach(complaint => {
+            const filtered =
+                complaints.filter((complaint) => {
 
-            if (complaint.status === "Pending") {
-                pending++;
+                    const id =
+                        String(complaint.id || "")
+                            .toLowerCase();
+
+                    const name =
+                        String(complaint.name || "")
+                            .toLowerCase();
+
+                    const category =
+                        String(complaint.category || "");
+
+                    const status =
+                        complaint.status || "Pending";
+
+
+                    const matchesSearch =
+                        id.includes(search) ||
+                        name.includes(search);
+
+                    const matchesStatus =
+                        selectedStatus === "All" ||
+                        status === selectedStatus;
+
+                    const matchesCategory =
+                        selectedCategory === "All" ||
+                        category === selectedCategory;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesStatus &&
+                        matchesCategory
+                    );
+
+                });
+
+
+            displayComplaints(filtered);
+
+        }
+
+
+        /* VIEW COMPLAINT */
+
+        function viewComplaint(complaint) {
+
+            selectedComplaint = complaint;
+
+
+            complaintDetails.innerHTML = `
+
+                <div class="detail-box">
+                    <div class="detail-label">Complaint ID</div>
+                    <div class="detail-value">
+                        ${escapeHTML(complaint.id || "N/A")}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Role</div>
+                    <div class="detail-value">
+                        ${escapeHTML(complaint.role || "N/A")}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Name</div>
+                    <div class="detail-value">
+                        ${escapeHTML(complaint.name || "N/A")}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Register / Employee ID</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.registerNumber ||
+                            complaint.employeeId ||
+                            "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Department</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.department || "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Semester</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.semester || "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Class / Designation</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.className ||
+                            complaint.designation ||
+                            "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Phone Number</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.phone || "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Category</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.category || "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="detail-label">Status</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.status || "Pending"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box full">
+                    <div class="detail-label">Complaint Description</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            complaint.description || "N/A"
+                        )}
+                    </div>
+                </div>
+
+                <div class="detail-box full">
+                    <div class="detail-label">Submitted Time</div>
+                    <div class="detail-value">
+                        ${escapeHTML(
+                            formatDate(complaint.createdAt)
+                        )}
+                    </div>
+                </div>
+
+            `;
+
+
+            newStatus.value =
+                complaint.status || "Pending";
+
+
+            complaintModal.style.display = "block";
+
+        }
+
+
+        /* CLOSE MODAL */
+
+        function closeModal() {
+
+            complaintModal.style.display = "none";
+
+            selectedComplaint = null;
+
+        }
+
+
+        /* UPDATE STATUS */
+
+        async function updateStatus() {
+
+            if (!selectedComplaint) {
+
+                return;
+
             }
 
-            if (complaint.status === "In Progress") {
-                progress++;
+
+            const status =
+                newStatus.value;
+
+
+            updateStatusButton.disabled = true;
+
+            updateStatusButton.textContent =
+                "Updating...";
+
+
+            try {
+
+                await updateDoc(
+                    doc(
+                        db,
+                        "complaints",
+                        selectedComplaint.id
+                    ),
+                    {
+                        status: status
+                    }
+                );
+
+
+                selectedComplaint.status =
+                    status;
+
+
+                const index =
+                    complaints.findIndex(
+                        complaint =>
+                            complaint.id === selectedComplaint.id
+                    );
+
+
+                if (index !== -1) {
+
+                    complaints[index].status =
+                        status;
+
+                }
+
+
+                displayComplaints(
+                    getFilteredComplaints()
+                );
+
+                updateStatistics();
+
+                updateAlert();
+
+
+                alert(
+                    "Complaint status updated successfully!"
+                );
+
+
+                closeModal();
+
+            } catch (error) {
+
+                console.error(
+                    "Error updating status:",
+                    error
+                );
+
+                alert(
+                    "Unable to update complaint status. Check the console."
+                );
+
+            } finally {
+
+                updateStatusButton.disabled = false;
+
+                updateStatusButton.textContent =
+                    "Update Status";
+
             }
 
-            if (complaint.status === "Resolved")
+        }
+
+
+        /* GET CURRENT FILTERED LIST */
+
+        function getFilteredComplaints() {
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+            const selectedStatus =
+                statusFilter.value;
+
+            const selectedCategory =
+                categoryFilter.value;
+
+
+            return complaints.filter((complaint) => {
+
+                const id =
+                    String(complaint.id || "")
+                        .toLowerCase();
+
+                const name =
+                    String(complaint.name || "")
+                        .toLowerCase();
+
+                const category =
+                    String(complaint.category || "");
+
+                const status =
+                    complaint.status || "Pending";
+
+
+                return (
+                    (id.includes(search) ||
+                        name.includes(search)) &&
+
+                    (
+                        selectedStatus === "All" ||
+                        status === selectedStatus
+                    ) &&
+
+                    (
+                        selectedCategory === "All" ||
+                        category === selectedCategory
+                    )
+                );
+
+            });
+
+        }
+
+
+        /* HTML SAFETY */
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+
+        }
+
+
+        /* LOGOUT */
+
+        function logout() {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /* EVENT LISTENERS */
+
+        logoutButton.addEventListener(
+            "click",
+            logout
+        );
+
+
+        searchInput.addEventListener(
+            "input",
+            filterComplaints
+        );
+
+
+        statusFilter.addEventListener(
+            "change",
+            filterComplaints
+        );
+
+
+        categoryFilter.addEventListener(
+            "change",
+            filterComplaints
+        );
+
+
+        closeModalButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        updateStatusButton.addEventListener(
+            "click",
+            updateStatus
+        );
+
+
+        window.addEventListener(
+            "click",
+            (event) => {
+
+                if (event.target === complaintModal) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        /* START DASHBOARD */
+
+        loadComplaints();
+
+    </script>
+
+</body>
+</html>
