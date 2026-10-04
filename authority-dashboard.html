@@ -15,19 +15,20 @@
         }
 
         body {
-            background: #f4f6f8;
-            color: #222;
+            background: linear-gradient(135deg, #eef6ff 0%, #fdf2ff 35%, #fff9e8 100%);
+            color: #1f2937;
         }
 
         /* ---------- HEADER ---------- */
 
         header {
-            background: #222;
+            background: linear-gradient(90deg, #1d4ed8, #7c3aed, #ec4899);
             color: white;
             padding: 18px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2);
         }
 
         .logo {
@@ -82,16 +83,23 @@
         /* ---------- ALERT ---------- */
 
         .alert-box {
-            background: #fff8e1;
-            border-left: 5px solid #f0ad00;
-            padding: 15px;
-            border-radius: 8px;
+            background: linear-gradient(90deg, #fff7d6, #fff3c4);
+            border-left: 6px solid #f59e0b;
+            padding: 15px 18px;
+            border-radius: 12px;
             margin-bottom: 25px;
+            box-shadow: 0 8px 18px rgba(245, 158, 11, 0.12);
         }
 
         .alert-box strong {
             display: block;
             margin-bottom: 5px;
+            color: #92400e;
+        }
+
+        #alertText {
+            color: #7c4a04;
+            font-weight: 600;
         }
 
         /* ---------- STAT CARDS ---------- */
@@ -104,34 +112,61 @@
         }
 
         .card {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
             padding: 22px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(59, 130, 246, 0.18);
+        }
+
+        .card:nth-child(1) {
+            background: linear-gradient(135deg, #edf6ff 0%, #dbeafe 100%);
+        }
+
+        .card:nth-child(2) {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+        }
+
+        .card:nth-child(3) {
+            background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+        }
+
+        .card:nth-child(4) {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
         }
 
         .card-title {
-            color: #666;
+            color: #475569;
             font-size: 14px;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .card-number {
             font-size: 30px;
             font-weight: bold;
+            color: #0f172a;
         }
 
         /* ---------- COMPLAINT SECTION ---------- */
 
         .complaint-section {
-            background: white;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 18px;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.15);
         }
 
         .section-title {
             margin-bottom: 20px;
+            color: #1e293b;
         }
 
         /* ---------- SEARCH & FILTER ---------- */
@@ -190,34 +225,38 @@
             border-radius: 15px;
             font-size: 12px;
             font-weight: bold;
+            letter-spacing: 0.03em;
         }
 
         .pending {
-            background: #fff3cd;
-            color: #856404;
+            background: linear-gradient(135deg, #fff7d6, #fde68a);
+            color: #92400e;
         }
 
         .progress {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1d4ed8;
         }
 
         .resolved {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
         }
 
         .view-btn {
-            background: #222;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: white;
             border: none;
-            padding: 7px 12px;
-            border-radius: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 6px 14px rgba(124, 58, 237, 0.2);
         }
 
         .view-btn:hover {
-            opacity: 0.85;
+            opacity: 0.92;
+            transform: translateY(-1px);
         }
 
         /* ---------- MODAL ---------- */
@@ -375,7 +414,7 @@
         <strong>New Complaint Alert</strong>
 
         <span id="alertText">
-            3 new complaints require attention.
+            Loading complaints...
         </span>
 
     </div>
@@ -392,7 +431,7 @@
             </div>
 
             <div class="card-number" id="totalCount">
-                24
+                0
             </div>
 
         </div>
@@ -405,7 +444,7 @@
             </div>
 
             <div class="card-number" id="pendingCount">
-                8
+                0
             </div>
 
         </div>
@@ -418,7 +457,7 @@
             </div>
 
             <div class="card-number" id="progressCount">
-                6
+                0
             </div>
 
         </div>
@@ -431,7 +470,7 @@
             </div>
 
             <div class="card-number" id="resolvedCount">
-                10
+                0
             </div>
 
         </div>
@@ -537,90 +576,6 @@
 
 
                 <tbody id="complaintTable">
-
-                    <tr>
-
-                        <td>CC20261001-001</td>
-
-                        <td>Student</td>
-
-                        <td>Infrastructure</td>
-
-                        <td>01 Oct 2026</td>
-
-                        <td>
-                            <span class="status pending">
-                                Pending
-                            </span>
-                        </td>
-
-                        <td>
-                            <button
-                                class="view-btn"
-                                onclick="viewComplaint(0)"
-                            >
-                                View
-                            </button>
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>CC20261001-002</td>
-
-                        <td>Faculty</td>
-
-                        <td>IT / Technical</td>
-
-                        <td>01 Oct 2026</td>
-
-                        <td>
-                            <span class="status progress">
-                                In Progress
-                            </span>
-                        </td>
-
-                        <td>
-                            <button
-                                class="view-btn"
-                                onclick="viewComplaint(1)"
-                            >
-                                View
-                            </button>
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>CC20261001-003</td>
-
-                        <td>Non-Faculty</td>
-
-                        <td>Cleanliness</td>
-
-                        <td>30 Sep 2026</td>
-
-                        <td>
-                            <span class="status resolved">
-                                Resolved
-                            </span>
-                        </td>
-
-                        <td>
-                            <button
-                                class="view-btn"
-                                onclick="viewComplaint(2)"
-                            >
-                                View
-                            </button>
-                        </td>
-
-                    </tr>
-
                 </tbody>
 
             </table>
@@ -725,6 +680,14 @@
                 Update Complaint Status
             </h3>
 
+            <button
+                class="view-btn"
+                id="openFullDetails"
+                type="button"
+            >
+                Full Details
+            </button>
+
             <select id="newStatus">
 
                 <option value="Pending">
@@ -760,195 +723,113 @@
 
     /* ================= SAMPLE DATA ================= */
 
-    const complaints = [
-
-        {
-            id: "CC20261001-001",
-            name: "Student User",
-            role: "Student",
-            category: "Infrastructure",
-            phone: "9876543210",
-            date: "01 Oct 2026",
-            status: "Pending",
-            description:
-                "The classroom projector is not working properly."
-        },
-
-        {
-            id: "CC20261001-002",
-            name: "Faculty User",
-            role: "Faculty",
-            category: "IT / Technical",
-            phone: "9876543211",
-            date: "01 Oct 2026",
-            status: "In Progress",
-            description:
-                "The computer system in the department is not functioning."
-        },
-
-        {
-            id: "CC20261001-003",
-            name: "Non-Faculty User",
-            role: "Non-Faculty",
-            category: "Cleanliness",
-            phone: "9876543212",
-            date: "30 Sep 2026",
-            status: "Resolved",
-            description:
-                "The common area requires regular cleaning."
-        }
-
-    ];
-
+    const complaints = [];
 
     let selectedComplaint = null;
 
-
-    /* ================= VIEW COMPLAINT ================= */
-
-    function viewComplaint(index) {
-
-        selectedComplaint = complaints[index];
-
-        document.getElementById("detailId").textContent =
-            selectedComplaint.id;
-
-        document.getElementById("detailName").textContent =
-            selectedComplaint.name;
-
-        document.getElementById("detailRole").textContent =
-            selectedComplaint.role;
-
-        document.getElementById("detailCategory").textContent =
-            selectedComplaint.category;
-
-        document.getElementById("detailPhone").textContent =
-            selectedComplaint.phone;
-
-        document.getElementById("detailDate").textContent =
-            selectedComplaint.date;
-
-        document.getElementById("detailDescription").textContent =
-            selectedComplaint.description;
-
-        document.getElementById("newStatus").value =
-            selectedComplaint.status;
-
-        document.getElementById("complaintModal").style.display =
-            "flex";
+    function getStatusClass(status) {
+        if (status === "Pending") return "pending";
+        if (status === "In Progress") return "progress";
+        if (status === "Resolved") return "resolved";
+        return "";
     }
 
+    function renderTable() {
+        const search = document.getElementById("searchInput").value.trim().toLowerCase();
+        const status = document.getElementById("statusFilter").value;
+        const category = document.getElementById("categoryFilter").value;
 
-    /* ================= CLOSE MODAL ================= */
+        const filteredComplaints = complaints.filter((complaint) => {
+            const matchesSearch = complaint.id.toLowerCase().includes(search);
+            const matchesStatus = status === "All" || complaint.status === status;
+            const matchesCategory = category === "All" || complaint.category === category;
+            return matchesSearch && matchesStatus && matchesCategory;
+        });
+
+        const tableBody = document.getElementById("complaintTable");
+
+        if (!filteredComplaints.length) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="text-align:center; color:#666; padding:20px;">
+                        No complaints found.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        tableBody.innerHTML = filteredComplaints.map((complaint) => `
+            <tr>
+                <td>${complaint.id}</td>
+                <td>${complaint.role}</td>
+                <td>${complaint.category}</td>
+                <td>${complaint.date}</td>
+                <td>
+                    <span class="status ${getStatusClass(complaint.status)}">
+                        ${complaint.status}
+                    </span>
+                </td>
+                <td>
+                    <button class="view-btn" onclick="viewComplaint('${complaint.id}')">
+                        View
+                    </button>
+                </td>
+            </tr>
+        `).join("");
+    }
+
+    function viewComplaint(complaintId) {
+        const complaint = typeof complaintId === "string"
+            ? complaints.find(item => item.id === complaintId)
+            : complaints[complaintId];
+
+        if (!complaint) {
+            return;
+        }
+
+        selectedComplaint = complaint;
+
+        document.getElementById("detailId").textContent = complaint.id;
+        document.getElementById("detailName").textContent = complaint.name;
+        document.getElementById("detailRole").textContent = complaint.role;
+        document.getElementById("detailCategory").textContent = complaint.category;
+        document.getElementById("detailPhone").textContent = complaint.phone;
+        document.getElementById("detailDate").textContent = complaint.date;
+        document.getElementById("detailDescription").textContent = complaint.description;
+        document.getElementById("newStatus").value = complaint.status;
+        document.getElementById("complaintModal").style.display = "flex";
+    }
 
     function closeModal() {
-
-        document.getElementById("complaintModal").style.display =
-            "none";
+        document.getElementById("complaintModal").style.display = "none";
     }
 
-
-    /* ================= UPDATE STATUS ================= */
-
     function updateStatus() {
-
         if (!selectedComplaint) {
             return;
         }
 
-        const newStatus =
-            document.getElementById("newStatus").value;
-
+        const newStatus = document.getElementById("newStatus").value;
         selectedComplaint.status = newStatus;
 
-        alert(
-            "Complaint " +
-            selectedComplaint.id +
-            " status updated to " +
-            newStatus
-        );
+        alert("Complaint " + selectedComplaint.id + " status updated to " + newStatus);
 
         closeModal();
-
+        renderTable();
         updateStatistics();
-
     }
-
-
-    /* ================= SEARCH & FILTER ================= */
 
     function filterComplaints() {
-
-        const search =
-            document.getElementById("searchInput")
-            .value
-            .toLowerCase();
-
-        const status =
-            document.getElementById("statusFilter")
-            .value;
-
-        const category =
-            document.getElementById("categoryFilter")
-            .value;
-
-        const rows =
-            document.querySelectorAll("#complaintTable tr");
-
-
-        rows.forEach((row, index) => {
-
-            const complaint =
-                complaints[index];
-
-            if (!complaint) {
-                return;
-            }
-
-            const matchesSearch =
-                complaint.id
-                .toLowerCase()
-                .includes(search);
-
-            const matchesStatus =
-                status === "All" ||
-                complaint.status === status;
-
-            const matchesCategory =
-                category === "All" ||
-                complaint.category === category;
-
-
-            if (
-                matchesSearch &&
-                matchesStatus &&
-                matchesCategory
-            ) {
-
-                row.style.display = "";
-
-            } else {
-
-                row.style.display = "none";
-
-            }
-
-        });
-
+        renderTable();
     }
 
-
-    /* ================= UPDATE STATISTICS ================= */
-
     function updateStatistics() {
-
         let pending = 0;
         let progress = 0;
         let resolved = 0;
 
-
-        complaints.forEach(complaint => {
-
+        complaints.forEach((complaint) => {
             if (complaint.status === "Pending") {
                 pending++;
             }
@@ -958,3 +839,40 @@
             }
 
             if (complaint.status === "Resolved") {
+                resolved++;
+            }
+        });
+
+        document.getElementById("totalCount").textContent = complaints.length;
+        document.getElementById("pendingCount").textContent = pending;
+        document.getElementById("progressCount").textContent = progress;
+        document.getElementById("resolvedCount").textContent = resolved;
+
+        const alertText = document.getElementById("alertText");
+        alertText.textContent = pending > 0
+            ? pending + " new complaints require attention."
+            : "No new complaints require attention.";
+    }
+
+    function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+            window.location.href = "authority-login.html";
+        }
+    }
+
+    document.getElementById("complaintModal").addEventListener("click", function (event) {
+        if (event.target === this) {
+            closeModal();
+        }
+    });
+
+    renderTable();
+    updateStatistics();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-app.js"></script>
+
+</body>
+</html>

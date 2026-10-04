@@ -14,28 +14,30 @@
         }
 
         body {
-            background: #f4f6f8;
+            background: linear-gradient(135deg, #eff6ff 0%, #fdf2f8 35%, #fff7ed 100%);
             min-height: 100vh;
             padding: 30px 15px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 620px;
             margin: 50px auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.92);
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 45px rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(148, 163, 184, 0.2);
         }
 
         h1 {
             text-align: center;
             margin-bottom: 8px;
+            color: #1e293b;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
+            color: #475569;
             margin-bottom: 25px;
         }
 
@@ -47,15 +49,18 @@
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
             font-size: 15px;
+            background: #fff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: #333;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
 
         .track-btn {
@@ -63,52 +68,65 @@
             margin-top: 20px;
             padding: 13px;
             border: none;
-            border-radius: 8px;
-            background: #222;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed, #ec4899);
             color: white;
             font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 12px 24px rgba(124, 58, 237, 0.25);
         }
 
         .track-btn:hover {
-            opacity: 0.9;
+            opacity: 0.96;
+            transform: translateY(-1px);
         }
 
         .result {
             display: none;
             margin-top: 25px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            padding: 22px 20px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f8fbff, #fdf2f8);
         }
 
         .result h2 {
             margin-bottom: 15px;
+            color: #1e293b;
         }
 
         .detail {
-            margin: 10px 0;
+            margin: 12px 0;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.7);
         }
 
         .detail strong {
             display: inline-block;
             width: 140px;
+            color: #475569;
         }
 
         .status {
             display: inline-block;
             padding: 6px 12px;
             border-radius: 20px;
-            background: #fff3cd;
-            color: #856404;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1d4ed8;
             font-weight: bold;
         }
 
         .error {
             display: none;
             margin-top: 15px;
-            color: #c62828;
+            color: #991b1b;
             text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            font-weight: 600;
         }
     </style>
 </head>
@@ -130,7 +148,7 @@
         <input
             type="text"
             id="complaintId"
-            placeholder="Eg: CC20261001-001"
+            placeholder="Paste your complaint tracking ID"
             required
         >
 
@@ -177,58 +195,9 @@
 
 </div>
 
-<script>
-
-    document.getElementById("trackForm").addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        const complaintId =
-            document.getElementById("complaintId").value.trim();
-
-        const result =
-            document.getElementById("result");
-
-        const error =
-            document.getElementById("errorMessage");
-
-        /*
-           Temporary demo data.
-
-           Later, this will be replaced with
-           Firebase/database data.
-        */
-
-        if (complaintId === "CC20261001-001") {
-
-            document.getElementById("displayId").textContent =
-                "CC20261001-001";
-
-            document.getElementById("displayCategory").textContent =
-                "Infrastructure";
-
-            document.getElementById("displayDate").textContent =
-                "01 October 2026";
-
-            document.getElementById("displayStatus").textContent =
-                "In Progress";
-
-            document.getElementById("displayUpdated").textContent =
-                "01 October 2026";
-
-            result.style.display = "block";
-            error.style.display = "none";
-
-        } else {
-
-            result.style.display = "none";
-            error.style.display = "block";
-
-        }
-
-    });
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-app.js"></script>
 
 </body>
 </html>

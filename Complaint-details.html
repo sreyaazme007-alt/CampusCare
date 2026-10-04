@@ -15,20 +15,20 @@
         }
 
         body {
-            background: #f4f6f8;
-            color: #222;
+            background: linear-gradient(135deg, #eef6ff 0%, #fdf2f8 35%, #fff8e8 100%);
+            color: #1f2937;
         }
 
         /* HEADER */
 
         header {
-            background: #222;
+            background: linear-gradient(90deg, #1d4ed8, #7c3aed, #ec4899);
             color: white;
             padding: 18px 30px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2);
         }
 
         .logo {
@@ -37,17 +37,18 @@
         }
 
         .back-btn {
-            background: white;
-            color: #222;
+            background: rgba(255, 255, 255, 0.94);
+            color: #1e293b;
             border: none;
             padding: 9px 16px;
-            border-radius: 7px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
         }
 
         .back-btn:hover {
-            background: #ddd;
+            background: #eef2ff;
         }
 
         /* MAIN */
@@ -56,6 +57,10 @@
             max-width: 1000px;
             margin: auto;
             padding: 30px 20px;
+        }
+
+        .main > .card {
+            display: none;
         }
 
         .page-title {
@@ -67,22 +72,23 @@
         }
 
         .page-title p {
-            color: #666;
+            color: #475569;
         }
 
         /* CARD */
 
         .card {
-            background: white;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 18px;
             margin-bottom: 20px;
-
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.16);
         }
 
         .card h2 {
             margin-bottom: 20px;
+            color: #1e293b;
         }
 
         /* DETAILS GRID */
@@ -94,28 +100,33 @@
         }
 
         .detail {
-            padding: 12px;
-            background: #f7f7f7;
-            border-radius: 7px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, #f8fbff, #f3f4ff);
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.15);
         }
 
         .detail-label {
-            color: #666;
+            color: #475569;
             font-size: 13px;
             margin-bottom: 5px;
+            font-weight: 600;
         }
 
         .detail-value {
             font-weight: bold;
+            color: #0f172a;
         }
 
         /* DESCRIPTION */
 
         .description {
-            background: #f7f7f7;
-            padding: 15px;
-            border-radius: 8px;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            padding: 16px 18px;
+            border-radius: 12px;
+            line-height: 1.7;
+            color: #7c2d12;
+            border: 1px solid rgba(245, 158, 11, 0.15);
         }
 
         /* IMAGE */
@@ -123,15 +134,14 @@
         .image-box {
             width: 100%;
             min-height: 180px;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-
+            border: 2px dashed #c4b5fd;
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
-
-            color: #777;
+            color: #6b7280;
             text-align: center;
+            background: linear-gradient(135deg, #f5f3ff, #eef2ff);
         }
 
         /* STATUS */
@@ -140,8 +150,8 @@
             display: inline-block;
             padding: 7px 14px;
             border-radius: 20px;
-            background: #fff3cd;
-            color: #856404;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
             font-weight: bold;
         }
 
@@ -156,10 +166,12 @@
         select,
         textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
             font-size: 15px;
+            background: #ffffff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         textarea {
@@ -171,39 +183,38 @@
         select:focus,
         textarea:focus {
             outline: none;
-            border-color: #333;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
 
         .save-btn {
             width: 100%;
             padding: 13px;
-
-            background: #222;
+            background: linear-gradient(135deg, #2563eb, #7c3aed, #ec4899);
             color: white;
-
             border: none;
-            border-radius: 8px;
-
+            border-radius: 10px;
             font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 12px 24px rgba(124, 58, 237, 0.25);
         }
 
         .save-btn:hover {
-            opacity: 0.9;
+            opacity: 0.96;
+            transform: translateY(-1px);
         }
 
         .success-message {
             display: none;
-
             margin-top: 15px;
             padding: 13px;
-
-            background: #e8f5e9;
-            color: #2e7d32;
-
-            border-radius: 8px;
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
+            border-radius: 10px;
             text-align: center;
             font-weight: bold;
+            border: 1px solid rgba(34, 197, 94, 0.12);
         }
 
         /* RESPONSIVE */
@@ -277,7 +288,7 @@
                 </div>
 
                 <div class="detail-value">
-                    CC20261001-001
+                    Loading...
                 </div>
 
             </div>
@@ -472,10 +483,6 @@
 
             No image uploaded for this complaint.
 
-            <!--
-            Later Firebase Storage image will appear here.
-            -->
-
         </div>
 
     </div>
@@ -544,52 +551,9 @@
 </div>
 
 
-<script>
-
-    /* BACK TO DASHBOARD */
-
-    function goBack() {
-
-        window.location.href =
-            "authority-dashboard.html";
-
-    }
-
-
-    /* UPDATE COMPLAINT */
-
-    document
-        .getElementById("updateForm")
-        .addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            const status =
-                document.getElementById("status").value;
-
-            const remarks =
-                document.getElementById("remarks").value;
-
-
-            /*
-                Temporary frontend behavior.
-
-                Later:
-                Firebase will save the status,
-                remarks and updated date.
-            */
-
-            console.log("New Status:", status);
-            console.log("Authority Remarks:", remarks);
-
-
-            document
-                .getElementById("successMessage")
-                .style.display = "block";
-
-        });
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-app.js"></script>
 
 </body>
 </html>
