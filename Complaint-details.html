@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Complaint Details - Campus Complaint Box</title>
+    <title>Resolved Complaints - Campus Complaint Box</title>
 
     <style>
         * {
@@ -18,8 +19,6 @@
             background: #f4f6f8;
             color: #222;
         }
-
-        /* HEADER */
 
         header {
             background: #222;
@@ -50,8 +49,6 @@
             background: #ddd;
         }
 
-        /* MAIN */
-
         .main {
             max-width: 1000px;
             margin: auto;
@@ -63,39 +60,52 @@
         }
 
         .page-title h1 {
-            margin-bottom: 5px;
+            margin-bottom: 7px;
         }
 
         .page-title p {
             color: #666;
         }
 
-        /* CARD */
-
-        .card {
+        .complaint-card {
             background: white;
             padding: 25px;
             border-radius: 12px;
-            margin-bottom: 20px;
-
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
         }
 
-        .card h2 {
+        .complaint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
-        /* DETAILS GRID */
+        .complaint-header h2 {
+            font-size: 20px;
+        }
+
+        .resolved-status {
+            background: #d4edda;
+            color: #155724;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
 
         .details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 18px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .detail {
-            padding: 12px;
             background: #f7f7f7;
+            padding: 12px;
             border-radius: 7px;
         }
 
@@ -109,109 +119,161 @@
             font-weight: bold;
         }
 
-        /* DESCRIPTION */
+        .description-title {
+            margin-bottom: 8px;
+        }
 
         .description {
             background: #f7f7f7;
             padding: 15px;
             border-radius: 8px;
             line-height: 1.6;
+            margin-bottom: 25px;
         }
 
-        /* IMAGE */
-
-        .image-box {
-            width: 100%;
-            min-height: 180px;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            color: #777;
-            text-align: center;
+        .feedback-section {
+            border-top: 1px solid #ddd;
+            padding-top: 22px;
         }
 
-        /* STATUS */
-
-        .current-status {
-            display: inline-block;
-            padding: 7px 14px;
-            border-radius: 20px;
-            background: #fff3cd;
-            color: #856404;
-            font-weight: bold;
+        .feedback-section h3 {
+            margin-bottom: 15px;
         }
 
-        /* FORM */
-
-        label {
+        .rating-label {
             display: block;
             font-weight: bold;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
         }
 
-        select,
+        .stars {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            font-size: 32px;
+            color: #ccc;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .star.selected {
+            color: #f5b301;
+        }
+
         textarea {
             width: 100%;
+            min-height: 100px;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 15px;
-        }
-
-        textarea {
-            min-height: 120px;
             resize: vertical;
-            margin-bottom: 20px;
         }
 
-        select:focus,
         textarea:focus {
             outline: none;
             border-color: #333;
         }
 
-        .save-btn {
+        .submit-btn {
             width: 100%;
-            padding: 13px;
-
+            margin-top: 15px;
+            padding: 12px;
             background: #222;
             color: white;
-
             border: none;
             border-radius: 8px;
-
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
         }
 
-        .save-btn:hover {
+        .submit-btn:hover {
             opacity: 0.9;
         }
 
         .success-message {
             display: none;
-
-            margin-top: 15px;
-            padding: 13px;
-
+            margin-top: 12px;
+            padding: 12px;
             background: #e8f5e9;
             color: #2e7d32;
-
             border-radius: 8px;
             text-align: center;
             font-weight: bold;
         }
 
-        /* RESPONSIVE */
+        .average-rating {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f7f7f7;
+            border-radius: 8px;
+        }
+
+        .average-stars {
+            color: #f5b301;
+            font-size: 22px;
+            margin-top: 5px;
+        }
+
+        .feedback-list {
+            margin-top: 20px;
+        }
+
+        .feedback-list h4 {
+            margin-bottom: 10px;
+        }
+
+        .feedback-item {
+            background: #f7f7f7;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .feedback-rating {
+            color: #f5b301;
+            margin-bottom: 5px;
+        }
+
+        .feedback-text {
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 30px;
+        }
+
+        .no-complaints {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            color: #666;
+        }
+
+        .error-message {
+            display: none;
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         @media (max-width: 650px) {
 
             header {
                 padding: 15px;
+            }
+
+            .logo {
+                font-size: 17px;
             }
 
             .main {
@@ -222,17 +284,15 @@
                 grid-template-columns: 1fr;
             }
 
-            .logo {
-                font-size: 17px;
+            .complaint-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
-
     </style>
 </head>
 
 <body>
-
-<!-- HEADER -->
 
 <header>
 
@@ -240,303 +300,35 @@
         Campus Complaint Box
     </div>
 
-    <button class="back-btn" onclick="goBack()">
-        ← Back to Dashboard
+    <button class="back-btn" id="backButton">
+        ← Back
     </button>
 
 </header>
 
 
-<!-- MAIN -->
-
 <div class="main">
 
     <div class="page-title">
 
-        <h1>Complaint Details</h1>
+        <h1>Resolved Complaints</h1>
 
         <p>
-            View and manage the selected complaint
+            View resolved complaints and share your feedback
         </p>
 
     </div>
 
 
-    <!-- COMPLAINT INFORMATION -->
-
-    <div class="card">
-
-        <h2>Complaint Information</h2>
-
-        <div class="details-grid">
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Complaint ID
-                </div>
-
-                <div class="detail-value">
-                    CC20261001-001
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Role
-                </div>
-
-                <div class="detail-value">
-                    Student
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Category
-                </div>
-
-                <div class="detail-value">
-                    Infrastructure
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Date Submitted
-                </div>
-
-                <div class="detail-value">
-                    01 October 2026
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Current Status
-                </div>
-
-                <div class="detail-value">
-
-                    <span class="current-status">
-                        Pending
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Last Updated
-                </div>
-
-                <div class="detail-value">
-                    01 October 2026
-                </div>
-
-            </div>
-
-        </div>
-
+    <div class="error-message" id="errorMessage">
+        Unable to load resolved complaints. Please try again.
     </div>
 
 
-    <!-- COMPLAINANT INFORMATION -->
+    <div id="complaintsContainer">
 
-    <div class="card">
-
-        <h2>Complainant Information</h2>
-
-        <div class="details-grid">
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Name
-                </div>
-
-                <div class="detail-value">
-                    Student User
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Register Number
-                </div>
-
-                <div class="detail-value">
-                    24CSE001
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Department
-                </div>
-
-                <div class="detail-value">
-                    Computer Science and Engineering
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Semester
-                </div>
-
-                <div class="detail-value">
-                    Semester 3
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Class
-                </div>
-
-                <div class="detail-value">
-                    CSE B
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Phone Number
-                </div>
-
-                <div class="detail-value">
-                    9876543210
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- COMPLAINT DESCRIPTION -->
-
-    <div class="card">
-
-        <h2>Complaint Description</h2>
-
-        <div class="description">
-
-            The projector in the classroom is not working properly.
-            The display becomes disconnected frequently during classes.
-
-        </div>
-
-    </div>
-
-
-    <!-- IMAGE -->
-
-    <div class="card">
-
-        <h2>Uploaded Evidence</h2>
-
-        <div class="image-box">
-
-            No image uploaded for this complaint.
-
-            <!--
-            Later Firebase Storage image will appear here.
-            -->
-
-        </div>
-
-    </div>
-
-
-    <!-- UPDATE -->
-
-    <div class="card">
-
-        <h2>Update Complaint</h2>
-
-        <form id="updateForm">
-
-            <label for="status">
-                Complaint Status
-            </label>
-
-            <select id="status">
-
-                <option value="Pending">
-                    Pending
-                </option>
-
-                <option value="In Progress">
-                    In Progress
-                </option>
-
-                <option value="Resolved">
-                    Resolved
-                </option>
-
-            </select>
-
-            <br><br>
-
-
-            <label for="remarks">
-                Authority Remarks
-            </label>
-
-            <textarea
-                id="remarks"
-                placeholder="Enter remarks or action taken..."
-            ></textarea>
-
-
-            <button
-                type="submit"
-                class="save-btn"
-            >
-                Save Changes
-            </button>
-
-        </form>
-
-
-        <div
-            class="success-message"
-            id="successMessage"
-        >
-            Complaint updated successfully!
+        <div class="loading">
+            Loading resolved complaints...
         </div>
 
     </div>
@@ -544,50 +336,541 @@
 </div>
 
 
-<script>
+<script type="module">
 
-    /* BACK TO DASHBOARD */
+    import { db } from "./firebase-config.js";
 
-    function goBack() {
+    import {
+        collection,
+        getDocs,
+        query,
+        where,
+        updateDoc,
+        doc,
+        arrayUnion
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-        window.location.href =
-            "authority-dashboard.html";
+
+    const container =
+        document.getElementById("complaintsContainer");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const backButton =
+        document.getElementById("backButton");
+
+
+    let selectedRatings = {};
+
+
+    /* BACK BUTTON */
+
+    backButton.addEventListener("click", function () {
+
+        window.history.back();
+
+    });
+
+
+    /* FORMAT DATE */
+
+    function formatDate(timestamp) {
+
+        if (!timestamp) {
+            return "Not available";
+        }
+
+        try {
+
+            return timestamp.toDate().toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+
+        } catch (error) {
+
+            return "Not available";
+
+        }
+    }
+
+
+    /* CREATE STAR DISPLAY */
+
+    function createStars(rating) {
+
+        let stars = "";
+
+        for (let i = 1; i <= 5; i++) {
+
+            if (i <= rating) {
+                stars += "★";
+            } else {
+                stars += "☆";
+            }
+
+        }
+
+        return stars;
+    }
+
+
+    /* LOAD RESOLVED COMPLAINTS */
+
+    async function loadResolvedComplaints() {
+
+        try {
+
+            const complaintsQuery = query(
+                collection(db, "complaints"),
+                where("status", "==", "Resolved")
+            );
+
+            const snapshot =
+                await getDocs(complaintsQuery);
+
+
+            container.innerHTML = "";
+
+
+            if (snapshot.empty) {
+
+                container.innerHTML = `
+                    <div class="no-complaints">
+                        <h3>No Resolved Complaints</h3>
+                        <p>There are currently no resolved complaints to display.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            snapshot.forEach(function (documentSnapshot) {
+
+                const complaint =
+                    documentSnapshot.data();
+
+                const complaintId =
+                    documentSnapshot.id;
+
+                displayComplaint(
+                    complaintId,
+                    complaint
+                );
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error loading resolved complaints:",
+                error
+            );
+
+            container.innerHTML = "";
+
+            errorMessage.style.display = "block";
+
+        }
 
     }
 
 
-    /* UPDATE COMPLAINT */
+    /* DISPLAY ONE COMPLAINT */
 
-    document
-        .getElementById("updateForm")
-        .addEventListener("submit", function(event) {
+    function displayComplaint(id, complaint) {
 
-            event.preventDefault();
-
-            const status =
-                document.getElementById("status").value;
-
-            const remarks =
-                document.getElementById("remarks").value;
+        const feedbacks =
+            complaint.feedbacks || [];
 
 
-            /*
-                Temporary frontend behavior.
+        let totalRating = 0;
 
-                Later:
-                Firebase will save the status,
-                remarks and updated date.
-            */
+        feedbacks.forEach(function (feedback) {
 
-            console.log("New Status:", status);
-            console.log("Authority Remarks:", remarks);
-
-
-            document
-                .getElementById("successMessage")
-                .style.display = "block";
+            totalRating += Number(feedback.rating) || 0;
 
         });
+
+
+        const averageRating =
+            feedbacks.length > 0
+                ? (totalRating / feedbacks.length).toFixed(1)
+                : "No ratings yet";
+
+
+        const card =
+            document.createElement("div");
+
+        card.className = "complaint-card";
+
+
+        card.innerHTML = `
+
+            <div class="complaint-header">
+
+                <h2>
+                    Complaint #${escapeHTML(id)}
+                </h2>
+
+                <span class="resolved-status">
+                    Resolved
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Category
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHTML(complaint.category || "Not available")}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Date Submitted
+                    </div>
+
+                    <div class="detail-value">
+                        ${formatDate(complaint.createdAt)}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <h3 class="description-title">
+                Complaint Description
+            </h3>
+
+
+            <div class="description">
+                ${escapeHTML(complaint.description || "No description available.")}
+            </div>
+
+
+            <div class="average-rating">
+
+                <strong>
+                    Overall Rating:
+                </strong>
+
+                <span>
+                    ${averageRating}
+                </span>
+
+                <div class="average-stars">
+                    ${
+                        feedbacks.length > 0
+                            ? createStars(Math.round(totalRating / feedbacks.length))
+                            : "☆☆☆☆☆"
+                    }
+                </div>
+
+                <small>
+                    ${feedbacks.length} feedback(s)
+                </small>
+
+            </div>
+
+
+            <div class="feedback-section">
+
+                <h3>
+                    Rate This Complaint Resolution
+                </h3>
+
+
+                <label class="rating-label">
+                    Your Rating
+                </label>
+
+
+                <div
+                    class="stars"
+                    data-id="${escapeHTML(id)}"
+                >
+
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+
+                </div>
+
+
+                <textarea
+                    class="feedback-textarea"
+                    data-id="${escapeHTML(id)}"
+                    placeholder="Write your feedback about the complaint resolution..."
+                ></textarea>
+
+
+                <button
+                    class="submit-btn"
+                    data-id="${escapeHTML(id)}"
+                >
+                    Submit Feedback
+                </button>
+
+
+                <div
+                    class="success-message"
+                    data-success="${escapeHTML(id)}"
+                >
+                    Thank you! Your feedback has been submitted.
+                </div>
+
+            </div>
+
+
+            <div class="feedback-list">
+
+                <h4>
+                    Public Feedback
+                </h4>
+
+                <div class="feedback-items">
+
+                    ${
+                        feedbacks.length > 0
+                            ? feedbacks.map(function (feedback) {
+
+                                return `
+                                    <div class="feedback-item">
+
+                                        <div class="feedback-rating">
+                                            ${createStars(Number(feedback.rating))}
+                                        </div>
+
+                                        <div class="feedback-text">
+                                            ${escapeHTML(feedback.text || "")}
+                                        </div>
+
+                                    </div>
+                                `;
+
+                            }).join("")
+                            : `
+                                <p style="color:#777;">
+                                    No feedback submitted yet.
+                                </p>
+                            `
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+
+        /* STAR CLICK EVENTS */
+
+        const stars =
+            card.querySelectorAll(".star");
+
+
+        stars.forEach(function (star) {
+
+            star.addEventListener("click", function () {
+
+                const rating =
+                    Number(this.dataset.rating);
+
+                selectedRatings[id] =
+                    rating;
+
+
+                stars.forEach(function (item) {
+
+                    const itemRating =
+                        Number(item.dataset.rating);
+
+                    if (itemRating <= rating) {
+
+                        item.classList.add("selected");
+
+                    } else {
+
+                        item.classList.remove("selected");
+
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        /* SUBMIT FEEDBACK */
+
+        const submitButton =
+            card.querySelector(".submit-btn");
+
+
+        submitButton.addEventListener(
+            "click",
+            async function () {
+
+                const rating =
+                    selectedRatings[id] || 0;
+
+
+                const textarea =
+                    card.querySelector(".feedback-textarea");
+
+
+                const feedbackText =
+                    textarea.value.trim();
+
+
+                if (rating === 0) {
+
+                    alert("Please select a star rating.");
+
+                    return;
+
+                }
+
+
+                if (feedbackText === "") {
+
+                    alert("Please write your feedback.");
+
+                    return;
+
+                }
+
+
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Submitting...";
+
+
+                try {
+
+                    const newFeedback = {
+
+                        rating: rating,
+
+                        text: feedbackText,
+
+                        submittedAt:
+                            new Date().toISOString()
+
+                    };
+
+
+                    await updateDoc(
+                        doc(db, "complaints", id),
+                        {
+                            feedbacks:
+                                arrayUnion(newFeedback)
+                        }
+                    );
+
+
+                    const successMessage =
+                        card.querySelector(
+                            ".success-message"
+                        );
+
+
+                    successMessage.style.display =
+                        "block";
+
+
+                    textarea.value = "";
+
+                    selectedRatings[id] = 0;
+
+
+                    stars.forEach(function (star) {
+
+                        star.classList.remove("selected");
+
+                    });
+
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Submit Feedback";
+
+
+                    /*
+                        Reload the page data so the
+                        new rating appears publicly.
+                    */
+
+                    await loadResolvedComplaints();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Error submitting feedback:",
+                        error
+                    );
+
+
+                    alert(
+                        "Unable to submit feedback. Please try again."
+                    );
+
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Submit Feedback";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* SECURITY HELPER */
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* START */
+
+    loadResolvedComplaints();
 
 </script>
 
