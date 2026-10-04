@@ -156,16 +156,88 @@
 
 </div>
 
-<script>
-    document.getElementById("complaintForm").addEventListener("submit", function(event) {
+
+<!-- Firebase -->
+<script type="module">
+
+    import { db } from "./firebase-config.js";
+
+    import {
+        collection,
+        addDoc,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+    document.getElementById("complaintForm").addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
-        document.getElementById("successMessage").style.display = "block";
+        const name = document.getElementById("name").value;
+        const employeeId = document.getElementById("employeeId").value;
+        const department = document.getElementById("department").value;
+        const designation = document.getElementById("designation").value;
+        const phone = document.getElementById("phone").value;
+        const category = document.getElementById("category").value;
+        const description = document.getElementById("description").value;
 
-        document.getElementById("complaintForm").reset();
+
+        const complaintData = {
+
+            role: "Non-Faculty",
+
+            name: name,
+            employeeId: employeeId,
+            department: department,
+            designation: designation,
+            phone: phone,
+
+            category: category,
+            description: description,
+
+            status: "Pending",
+
+            createdAt: serverTimestamp()
+        };
+
+
+        try {
+
+            const docRef = await addDoc(
+                collection(db, "complaints"),
+                complaintData
+            );
+
+            console.log(
+                "NON-FACULTY FORM SUBMITTED"
+            );
+
+            console.log(
+                "Non-Faculty complaint saved with ID:",
+                docRef.id
+            );
+
+
+            document.getElementById("successMessage").style.display = "block";
+
+            document.getElementById("complaintForm").reset();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error saving complaint:",
+                error
+            );
+
+            alert(
+                "Failed to register complaint. Please try again."
+            );
+
+        }
 
     });
+
 </script>
 
 </body>
