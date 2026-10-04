@@ -1,174 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Complaint Registration</title>
+    <title>Student Complaint Registration</title><style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+    body {
+        background: #f4f6f8;
+        min-height: 100vh;
+        padding: 30px 15px;
+    }
 
-        body {
-            background: #f4f6f8;
-            min-height: 100vh;
-            padding: 30px 15px;
-        }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 8px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 8px;
-        }
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+    }
 
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
+    label {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
 
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+    }
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 15px;
-        }
+    textarea {
+        height: 120px;
+        resize: vertical;
+    }
 
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #333;
+    }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #333;
-        }
+    .submit-btn {
+        width: 100%;
+        margin-top: 25px;
+        padding: 13px;
+        border: none;
+        border-radius: 8px;
+        background: #222;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-        .submit-btn {
-            width: 100%;
-            margin-top: 25px;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #222;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .submit-btn:hover {
+        opacity: 0.9;
+    }
 
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
+    .success-message {
+        display: none;
+        margin-top: 20px;
+        padding: 18px;
+        background: #e8f5e9;
+        color: #2e7d32;
+        border-radius: 8px;
+        text-align: center;
+    }
 
-        .success-message {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-        }
-    </style>
-</head>
+    .success-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
-<body>
+    .complaint-id {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 10px 14px;
+        background: white;
+        border-radius: 6px;
+        color: #222;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
 
-<div class="container">
+    .id-note {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #555;
+    }
+</style>
 
-    <h1>Student Complaint</h1>
-    <p class="subtitle">Register your complaint</p>
+</head><body><div class="container"><h1>Student Complaint</h1>
+<p class="subtitle">Register your complaint</p>
 
-    <form id="complaintForm">
+<form id="complaintForm">
 
-        <label for="name">Full Name</label>
-        <input type="text" id="name" required>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" required>
 
-        <label for="registerNumber">Register Number</label>
-        <input type="text" id="registerNumber" required>
+    <label for="registerNumber">Register Number</label>
+    <input type="text" id="registerNumber" required>
 
-        <label for="department">Department</label>
-        <input type="text" id="department" placeholder="Eg: CSE" required>
+    <label for="department">Department</label>
+    <input type="text" id="department" placeholder="Eg: CSE" required>
 
-        <label for="semester">Semester</label>
-        <select id="semester" required>
-            <option value="">Select Semester</option>
-            <option>Semester 1</option>
-            <option>Semester 2</option>
-            <option>Semester 3</option>
-            <option>Semester 4</option>
-            <option>Semester 5</option>
-            <option>Semester 6</option>
-            <option>Semester 7</option>
-            <option>Semester 8</option>
-        </select>
+    <label for="semester">Semester</label>
+    <select id="semester" required>
+        <option value="">Select Semester</option>
+        <option>Semester 1</option>
+        <option>Semester 2</option>
+        <option>Semester 3</option>
+        <option>Semester 4</option>
+        <option>Semester 5</option>
+        <option>Semester 6</option>
+        <option>Semester 7</option>
+        <option>Semester 8</option>
+    </select>
 
-        <label for="className">Class</label>
-        <input type="text" id="className" placeholder="Eg: CSE B" required>
+    <label for="className">Class</label>
+    <input type="text" id="className" placeholder="Eg: CSE B" required>
 
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" required>
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" required>
 
-        <label for="category">Complaint Category</label>
-        <select id="category" required>
-            <option value="">Select Category</option>
-            <option>Academic</option>
-            <option>Infrastructure</option>
-            <option>Hostel</option>
-            <option>Transportation</option>
-            <option>Library</option>
-            <option>Food/Canteen</option>
-            <option>Cleanliness</option>
-            <option>Other</option>
-        </select>
+    <label for="category">Complaint Category</label>
+    <select id="category" required>
+        <option value="">Select Category</option>
+        <option>Academic</option>
+        <option>Infrastructure</option>
+        <option>Hostel</option>
+        <option>Transportation</option>
+        <option>Library</option>
+        <option>Food/Canteen</option>
+        <option>Cleanliness</option>
+        <option>Other</option>
+    </select>
 
-        <label for="description">Complaint Description</label>
-        <textarea
-            id="description"
-            placeholder="Describe your complaint..."
-            required></textarea>
+    <label for="description">Complaint Description</label>
+    <textarea
+        id="description"
+        placeholder="Describe your complaint..."
+        required></textarea>
 
-        <label for="image">Upload Image (Optional)</label>
-        <input type="file" id="image" accept="image/*">
+    <label for="image">Upload Image (Optional)</label>
+    <input type="file" id="image" accept="image/*">
 
-        <button type="submit" class="submit-btn">
-            Register Complaint
-        </button>
+    <button type="submit" class="submit-btn">
+        Register Complaint
+    </button>
 
-    </form>
+</form>
 
-    <div class="success-message" id="successMessage">
+<div class="success-message" id="successMessage">
+
+    <div class="success-title">
         Complaint registered successfully!
+    </div>
+
+    <div>
+        Your Complaint ID is:
+    </div>
+
+    <div class="complaint-id" id="complaintId">
+    </div>
+
+    <div class="id-note">
+        Please save this Complaint ID to check your complaint status.
     </div>
 
 </div>
 
-<script type="module">
+</div><script type="module">
 
     /* Firebase connection */
     import { db } from "./firebase-config.js";
@@ -187,12 +215,14 @@
     const successMessage =
         document.getElementById("successMessage");
 
+    const complaintId =
+        document.getElementById("complaintId");
+
 
     /* Submit complaint */
     complaintForm.addEventListener("submit", async function(event) {
 
         event.preventDefault();
-
 
         try {
 
@@ -238,13 +268,19 @@
             );
 
 
+            /* Get the unique Firebase Complaint ID */
+            const generatedComplaintId = complaintRef.id;
+
+
             console.log(
                 "Complaint saved with ID:",
-                complaintRef.id
+                generatedComplaintId
             );
 
 
-            /* Show success message */
+            /* Display Complaint ID to the user */
+            complaintId.textContent = generatedComplaintId;
+
             successMessage.style.display = "block";
 
 
@@ -267,7 +303,5 @@
 
     });
 
-</script>
-
-</body>
+</script></body>
 </html>
