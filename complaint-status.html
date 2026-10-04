@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Track Complaint</title>
+
+    <title>Track Complaint - Campus Complaint Box</title>
 
     <style>
         * {
@@ -74,6 +76,11 @@
             opacity: 0.9;
         }
 
+        .track-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .result {
             display: none;
             margin-top: 25px;
@@ -87,7 +94,8 @@
         }
 
         .detail {
-            margin: 10px 0;
+            margin: 12px 0;
+            line-height: 1.5;
         }
 
         .detail strong {
@@ -104,11 +112,52 @@
             font-weight: bold;
         }
 
+        .status.resolved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.in-progress {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
         .error {
             display: none;
             margin-top: 15px;
             color: #c62828;
             text-align: center;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+            color: #555;
+        }
+
+        .details-btn {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #333;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .details-btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -130,15 +179,19 @@
         <input
             type="text"
             id="complaintId"
-            placeholder="Eg: CC20261001-001"
+            placeholder="Enter your Complaint ID"
             required
         >
 
-        <button type="submit" class="track-btn">
+        <button type="submit" class="track-btn" id="trackButton">
             Track Complaint
         </button>
 
     </form>
+
+    <p class="loading" id="loadingMessage">
+        Checking complaint...
+    </p>
 
     <p class="error" id="errorMessage">
         Complaint not found. Please check your Complaint ID.
@@ -175,54 +228,198 @@
 
     </div>
 
+    <a href="complaint-details.html" class="details-btn" id="detailsButton">
+        View Resolved Complaints & Feedback
+    </a>
+
 </div>
 
-<script>
 
-    document.getElementById("trackForm").addEventListener("submit", function(event) {
+<script type="module">
+
+    import { db } from "./firebase-config.js";
+
+    import {
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+    const trackForm = document.getElementById("trackForm");
+
+    const complaintIdInput =
+        document.getElementById("complaintId");
+
+    const trackButton =
+        document.getElementById("trackButton");
+
+    const loadingMessage =
+        document.getElementById("loadingMessage");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const result =
+        document.getElementById("result");
+
+    const detailsButton =
+        document.getElementById("detailsButton");
+
+
+    function formatDate(timestamp) {
+
+        if (!timestamp) {
+            return "Not available";
+        }
+
+        try {
+
+            const date = timestamp.toDate();
+
+            return date.toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+
+        } catch (error) {
+
+            return "Not available";
+
+        }
+    }
+
+
+    function setStatusStyle(statusElement, status) {
+
+        statusElement.className = "status";
+
+        if (status === "Resolved") {
+            statusElement.classList.add("resolved");
+        }
+        else if (status === "In Progress") {
+            statusElement.classList.add("in-progress");
+        }
+        else {
+            statusElement.classList.add("pending");
+        }
+    }
+
+
+    trackForm.addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
         const complaintId =
-            document.getElementById("complaintId").value.trim();
+            complaintIdInput.value.trim();
 
-        const result =
-            document.getElementById("result");
+        if (!complaintId) {
+            return;
+        }
 
-        const error =
-            document.getElementById("errorMessage");
 
-        /*
-           Temporary demo data.
+        // Reset previous messages
 
-           Later, this will be replaced with
-           Firebase/database data.
-        */
+        result.style.display = "none";
+        errorMessage.style.display = "none";
+        detailsButton.style.display = "none";
 
-        if (complaintId === "CC20261001-001") {
+        loadingMessage.style.display = "block";
+        trackButton.disabled = true;
+
+
+        try {
+
+            // Get complaint from Firestore
+
+            const complaintReference =
+                doc(db, "complaints", complaintId);
+
+            const complaintSnapshot =
+                await getDoc(complaintReference);
+
+
+            if (!complaintSnapshot.exists()) {
+
+                loadingMessage.style.display = "none";
+                errorMessage.style.display = "block";
+                trackButton.disabled = false;
+
+                return;
+            }
+
+
+            const complaint =
+                complaintSnapshot.data();
+
+
+            // Display complaint ID
 
             document.getElementById("displayId").textContent =
-                "CC20261001-001";
+                complaintSnapshot.id;
+
+
+            // Display category
 
             document.getElementById("displayCategory").textContent =
-                "Infrastructure";
+                complaint.category || "Not available";
+
+
+            // Display submitted date
 
             document.getElementById("displayDate").textContent =
-                "01 October 2026";
+                formatDate(complaint.createdAt);
 
-            document.getElementById("displayStatus").textContent =
-                "In Progress";
+
+            // Display status
+
+            const status =
+                complaint.status || "Pending";
+
+            const statusElement =
+                document.getElementById("displayStatus");
+
+            statusElement.textContent = status;
+
+            setStatusStyle(statusElement, status);
+
+
+            // Display updated date
 
             document.getElementById("displayUpdated").textContent =
-                "01 October 2026";
+                formatDate(complaint.updatedAt);
 
+
+            // Show result
+
+            loadingMessage.style.display = "none";
+            errorMessage.style.display = "none";
             result.style.display = "block";
-            error.style.display = "none";
 
-        } else {
+            trackButton.disabled = false;
 
-            result.style.display = "none";
-            error.style.display = "block";
+
+            // If complaint is resolved,
+            // show link to resolved complaints page
+
+            if (status === "Resolved") {
+
+                detailsButton.style.display = "block";
+
+            }
+
+
+        } catch (error) {
+
+            console.error("Error checking complaint:", error);
+
+            loadingMessage.style.display = "none";
+            errorMessage.textContent =
+                "Unable to check complaint. Please try again.";
+
+            errorMessage.style.display = "block";
+
+            trackButton.disabled = false;
 
         }
 
