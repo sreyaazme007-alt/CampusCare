@@ -101,6 +101,18 @@
             font-weight: bold;
         }
 
+        .complaint-id {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            color: #111;
+            font-size: 16px;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
         .error-message {
             display: none;
             margin-top: 20px;
@@ -134,7 +146,6 @@
             required
         >
 
-
         <label for="employeeId">Employee ID</label>
 
         <input
@@ -142,7 +153,6 @@
             id="employeeId"
             required
         >
-
 
         <label for="department">Department</label>
 
@@ -153,7 +163,6 @@
             required
         >
 
-
         <label for="designation">Designation</label>
 
         <input
@@ -163,7 +172,6 @@
             required
         >
 
-
         <label for="phone">Phone Number</label>
 
         <input
@@ -171,7 +179,6 @@
             id="phone"
             required
         >
-
 
         <label for="category">Complaint Category</label>
 
@@ -192,7 +199,6 @@
 
         </select>
 
-
         <label for="description">
             Complaint Description
         </label>
@@ -202,7 +208,6 @@
             placeholder="Describe your complaint..."
             required
         ></textarea>
-
 
         <label for="image">
             Upload Image (Optional)
@@ -214,7 +219,6 @@
             accept="image/*"
         >
 
-
         <button
             type="submit"
             class="submit-btn"
@@ -225,14 +229,17 @@
 
     </form>
 
-
     <div
         class="success-message"
         id="successMessage"
     >
         Complaint registered successfully!
-    </div>
 
+        <span class="complaint-id">
+            Complaint ID:
+            <span id="complaintId"></span>
+        </span>
+    </div>
 
     <div
         class="error-message"
@@ -275,6 +282,9 @@
     const submitButton =
         document.getElementById("submitButton");
 
+    const complaintId =
+        document.getElementById("complaintId");
+
 
     /* ============================
        SUBMIT FORM
@@ -288,7 +298,6 @@
 
             console.log("FACULTY FORM SUBMITTED");
 
-
             /* Hide old messages */
 
             successMessage.style.display =
@@ -296,7 +305,6 @@
 
             errorMessage.style.display =
                 "none";
-
 
             /* Disable button */
 
@@ -384,10 +392,25 @@
                     );
 
 
+                /* ============================
+                   GET FIRESTORE COMPLAINT ID
+                ============================ */
+
+                const generatedComplaintId =
+                    complaintRef.id;
+
                 console.log(
-                    "Faculty complaint saved with ID:",
-                    complaintRef.id
+                    "Faculty Complaint ID:",
+                    generatedComplaintId
                 );
+
+
+                /* ============================
+                   DISPLAY COMPLAINT ID
+                ============================ */
+
+                complaintId.textContent =
+                    generatedComplaintId;
 
 
                 /* ============================
@@ -399,7 +422,6 @@
 
                 complaintForm.reset();
 
-
                 submitButton.textContent =
                     "Complaint Registered";
 
@@ -409,7 +431,7 @@
                 });
 
 
-                /* Reset button after 3 seconds */
+                /* Reset button after 5 seconds */
 
                 setTimeout(function() {
 
@@ -422,7 +444,7 @@
                     submitButton.textContent =
                         "Register Complaint";
 
-                }, 3000);
+                }, 5000);
 
 
             } catch (error) {
@@ -432,10 +454,8 @@
                     error
                 );
 
-
                 errorMessage.style.display =
                     "block";
-
 
                 submitButton.disabled =
                     false;
