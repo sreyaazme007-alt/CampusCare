@@ -1,164 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Non-Faculty Complaint Registration</title>
+    <title>Non-Faculty Complaint Registration</title><style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+    body {
+        background: #f4f6f8;
+        min-height: 100vh;
+        padding: 30px 15px;
+    }
 
-        body {
-            background: #f4f6f8;
-            min-height: 100vh;
-            padding: 30px 15px;
-        }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 8px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 8px;
-        }
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+    }
 
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
+    label {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
 
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+    }
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 15px;
-        }
+    textarea {
+        height: 120px;
+        resize: vertical;
+    }
 
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #333;
+    }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #333;
-        }
+    .submit-btn {
+        width: 100%;
+        margin-top: 25px;
+        padding: 13px;
+        border: none;
+        border-radius: 8px;
+        background: #222;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-        .submit-btn {
-            width: 100%;
-            margin-top: 25px;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #222;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .submit-btn:hover {
+        opacity: 0.9;
+    }
 
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
+    .success-message {
+        display: none;
+        margin-top: 20px;
+        padding: 18px;
+        background: #e8f5e9;
+        color: #2e7d32;
+        border-radius: 8px;
+        text-align: center;
+    }
 
-        .success-message {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-        }
-    </style>
-</head>
+    .success-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
-<body>
+    .complaint-id {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 10px 14px;
+        background: white;
+        border-radius: 6px;
+        color: #222;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
 
-<div class="container">
+    .id-note {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #555;
+    }
+</style>
 
-    <h1>Non-Faculty Complaint</h1>
-    <p class="subtitle">Register your complaint</p>
+</head><body><div class="container"><h1>Non-Faculty Complaint</h1>
+<p class="subtitle">Register your complaint</p>
 
-    <form id="complaintForm">
+<form id="complaintForm">
 
-        <label for="name">Full Name</label>
-        <input type="text" id="name" required>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" required>
 
-        <label for="employeeId">Employee ID</label>
-        <input type="text" id="employeeId" required>
+    <label for="employeeId">Employee ID</label>
+    <input type="text" id="employeeId" required>
 
-        <label for="department">Department / Section</label>
-        <input type="text" id="department"
-               placeholder="Eg: Administration" required>
+    <label for="department">Department / Section</label>
+    <input type="text" id="department"
+           placeholder="Eg: Administration" required>
 
-        <label for="designation">Designation</label>
-        <input type="text" id="designation"
-               placeholder="Eg: Office Assistant" required>
+    <label for="designation">Designation</label>
+    <input type="text" id="designation"
+           placeholder="Eg: Office Assistant" required>
 
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" required>
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" required>
 
-        <label for="category">Complaint Category</label>
-        <select id="category" required>
-            <option value="">Select Category</option>
-            <option>Infrastructure</option>
-            <option>Administration</option>
-            <option>Maintenance</option>
-            <option>Cleanliness</option>
-            <option>Transportation</option>
-            <option>Security</option>
-            <option>IT / Technical</option>
-            <option>Other</option>
-        </select>
+    <label for="category">Complaint Category</label>
+    <select id="category" required>
+        <option value="">Select Category</option>
+        <option>Infrastructure</option>
+        <option>Administration</option>
+        <option>Maintenance</option>
+        <option>Cleanliness</option>
+        <option>Transportation</option>
+        <option>Security</option>
+        <option>IT / Technical</option>
+        <option>Other</option>
+    </select>
 
-        <label for="description">Complaint Description</label>
-        <textarea id="description"
-                  placeholder="Describe your complaint..."
-                  required></textarea>
+    <label for="description">Complaint Description</label>
+    <textarea id="description"
+              placeholder="Describe your complaint..."
+              required></textarea>
 
-        <label for="image">Upload Image (Optional)</label>
-        <input type="file" id="image" accept="image/*">
+    <label for="image">Upload Image (Optional)</label>
+    <input type="file" id="image" accept="image/*">
 
-        <button type="submit" class="submit-btn">
-            Register Complaint
-        </button>
+    <button type="submit" class="submit-btn">
+        Register Complaint
+    </button>
 
-    </form>
+</form>
 
-    <div class="success-message" id="successMessage">
+<div class="success-message" id="successMessage">
+
+    <div class="success-title">
         Complaint registered successfully!
+    </div>
+
+    <div>
+        Your Complaint ID is:
+    </div>
+
+    <div class="complaint-id" id="complaintId"></div>
+
+    <div class="id-note">
+        Please save this Complaint ID to check your complaint status.
     </div>
 
 </div>
 
-
-<!-- Firebase -->
-<script type="module">
+</div><!-- Firebase --><script type="module">
 
     import { db } from "./firebase-config.js";
 
@@ -169,17 +194,41 @@
     } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-    document.getElementById("complaintForm").addEventListener("submit", async function(event) {
+    const complaintForm =
+        document.getElementById("complaintForm");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    const complaintId =
+        document.getElementById("complaintId");
+
+
+    complaintForm.addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const employeeId = document.getElementById("employeeId").value;
-        const department = document.getElementById("department").value;
-        const designation = document.getElementById("designation").value;
-        const phone = document.getElementById("phone").value;
-        const category = document.getElementById("category").value;
-        const description = document.getElementById("description").value;
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const employeeId =
+            document.getElementById("employeeId").value.trim();
+
+        const department =
+            document.getElementById("department").value.trim();
+
+        const designation =
+            document.getElementById("designation").value.trim();
+
+        const phone =
+            document.getElementById("phone").value.trim();
+
+        const category =
+            document.getElementById("category").value;
+
+        const description =
+            document.getElementById("description").value.trim();
 
 
         const complaintData = {
@@ -187,12 +236,17 @@
             role: "Non-Faculty",
 
             name: name,
+
             employeeId: employeeId,
+
             department: department,
+
             designation: designation,
+
             phone: phone,
 
             category: category,
+
             description: description,
 
             status: "Pending",
@@ -208,6 +262,7 @@
                 complaintData
             );
 
+
             console.log(
                 "NON-FACULTY FORM SUBMITTED"
             );
@@ -218,9 +273,14 @@
             );
 
 
-            document.getElementById("successMessage").style.display = "block";
+            /* Display Complaint ID */
+            complaintId.textContent = docRef.id;
 
-            document.getElementById("complaintForm").reset();
+            successMessage.style.display = "block";
+
+
+            /* Clear form */
+            complaintForm.reset();
 
 
         } catch (error) {
@@ -238,7 +298,5 @@
 
     });
 
-</script>
-
-</body>
+</script></body>
 </html>
