@@ -128,6 +128,64 @@
             background: linear-gradient(135deg, #fee2e2, #fecaca);
             font-weight: 600;
         }
+
+        .feedback-box {
+            display: none;
+            margin-top: 25px;
+            padding: 18px 20px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f0fdf4, #f8fafc);
+        }
+
+        .feedback-box h3 {
+            margin-bottom: 12px;
+            color: #1e293b;
+        }
+
+        .feedback-box label {
+            display: block;
+            margin: 12px 0 8px;
+            font-weight: 700;
+        }
+
+        .feedback-box select,
+        .feedback-box textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            resize: vertical;
+            background: #fff;
+        }
+
+        .feedback-box textarea {
+            min-height: 100px;
+            margin-bottom: 12px;
+        }
+
+        .feedback-btn {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .feedback-success {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -191,6 +249,29 @@
             <span id="displayUpdated"></span>
         </div>
 
+    </div>
+
+    <div class="feedback-box" id="feedbackBox">
+        <h3>Feedback</h3>
+
+        <label for="feedbackRating">How satisfied are you?</label>
+        <select id="feedbackRating">
+            <option value="Satisfied">Satisfied</option>
+            <option value="Very Satisfied">Very Satisfied</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Needs Improvement">Needs Improvement</option>
+        </select>
+
+        <label for="feedbackText">Your comments</label>
+        <textarea id="feedbackText" placeholder="Tell us how the resolution worked for you..."></textarea>
+
+        <button type="button" class="feedback-btn" id="submitFeedback">
+            Submit Feedback
+        </button>
+
+        <p class="feedback-success" id="feedbackMessage">
+            Feedback saved successfully.
+        </p>
     </div>
 
 </div>

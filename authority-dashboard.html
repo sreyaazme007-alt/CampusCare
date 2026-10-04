@@ -727,6 +727,24 @@
 
     let selectedComplaint = null;
 
+    function getComplaintList() {
+        if (window.__campuscareComplaints && window.__campuscareComplaints.length) {
+            return window.__campuscareComplaints;
+        }
+        return complaints;
+    }
+
+    function formatComplaintDate(value) {
+        if (!value) return "N/A";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return value;
+        return date.toLocaleDateString(undefined, {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+    }
+
     function getStatusClass(status) {
         if (status === "Pending") return "pending";
         if (status === "In Progress") return "progress";
@@ -738,9 +756,10 @@
         const search = document.getElementById("searchInput").value.trim().toLowerCase();
         const status = document.getElementById("statusFilter").value;
         const category = document.getElementById("categoryFilter").value;
+        const liveComplaints = getComplaintList();
 
-        const filteredComplaints = complaints.filter((complaint) => {
-            const matchesSearch = complaint.id.toLowerCase().includes(search);
+        const filteredComplaints = liveComplaints.filter((complaint) => {
+            const matchesSearch = (complaint.id || "").toLowerCase().includes(search);
             const matchesStatus = status === "All" || complaint.status === status;
             const matchesCategory = category === "All" || complaint.category === category;
             return matchesSearch && matchesStatus && matchesCategory;
@@ -762,12 +781,12 @@
         tableBody.innerHTML = filteredComplaints.map((complaint) => `
             <tr>
                 <td>${complaint.id}</td>
-                <td>${complaint.role}</td>
-                <td>${complaint.category}</td>
-                <td>${complaint.date}</td>
+                <td>${complaint.role || "-"}</td>
+                <td>${complaint.category || "-"}</td>
+                <td>${formatComplaintDate(complaint.created_at || complaint.date)}</td>
                 <td>
                     <span class="status ${getStatusClass(complaint.status)}">
-                        ${complaint.status}
+                        ${complaint.status || "Pending"}
                     </span>
                 </td>
                 <td>
@@ -780,24 +799,26 @@
     }
 
     function viewComplaint(complaintId) {
+        const liveComplaints = getComplaintList();
         const complaint = typeof complaintId === "string"
-            ? complaints.find(item => item.id === complaintId)
-            : complaints[complaintId];
+            ? liveComplaints.find(item => item.id === complaintId)
+            : liveComplaints[complaintId];
 
         if (!complaint) {
             return;
         }
 
         selectedComplaint = complaint;
+        window.__campuscareSelectedComplaint = complaint;
 
         document.getElementById("detailId").textContent = complaint.id;
-        document.getElementById("detailName").textContent = complaint.name;
-        document.getElementById("detailRole").textContent = complaint.role;
-        document.getElementById("detailCategory").textContent = complaint.category;
-        document.getElementById("detailPhone").textContent = complaint.phone;
-        document.getElementById("detailDate").textContent = complaint.date;
-        document.getElementById("detailDescription").textContent = complaint.description;
-        document.getElementById("newStatus").value = complaint.status;
+        document.getElementById("detailName").textContent = complaint.name || "Not provided";
+        document.getElementById("detailRole").textContent = complaint.role || "Not provided";
+        document.getElementById("detailCategory").textContent = complaint.category || "Not provided";
+        document.getElementById("detailPhone").textContent = complaint.phone || "Not provided";
+        document.getElementById("detailDate").textContent = formatComplaintDate(complaint.created_at || complaint.date);
+        document.getElementById("detailDescription").textContent = complaint.description || "No description provided.";
+        document.getElementById("newStatus").value = complaint.status || "Pending";
         document.getElementById("complaintModal").style.display = "flex";
     }
 
@@ -812,6 +833,7 @@
 
         const newStatus = document.getElementById("newStatus").value;
         selectedComplaint.status = newStatus;
+        window.__campuscareSelectedComplaint = selectedComplaint;
 
         alert("Complaint " + selectedComplaint.id + " status updated to " + newStatus);
 
@@ -828,8 +850,9 @@
         let pending = 0;
         let progress = 0;
         let resolved = 0;
+        const liveComplaints = getComplaintList();
 
-        complaints.forEach((complaint) => {
+        liveComplaints.forEach((complaint) => {
             if (complaint.status === "Pending") {
                 pending++;
             }
@@ -843,7 +866,7 @@
             }
         });
 
-        document.getElementById("totalCount").textContent = complaints.length;
+        document.getElementById("totalCount").textContent = liveComplaints.length;
         document.getElementById("pendingCount").textContent = pending;
         document.getElementById("progressCount").textContent = progress;
         document.getElementById("resolvedCount").textContent = resolved;

@@ -129,6 +129,76 @@
             border: 1px solid rgba(245, 158, 11, 0.15);
         }
 
+        .feedback-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+        }
+
+        .feedback-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .field-group {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field-group label {
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .feedback-form input,
+        .feedback-form select,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #fff;
+        }
+
+        .feedback-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .feedback-form button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
+            font-weight: bold;
+        }
+
+        .empty-state {
+            padding: 18px;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #475569;
+            border: 1px dashed #cbd5e1;
+            text-align: center;
+            font-weight: 600;
+        }
+
         /* IMAGE */
 
         .image-box {
@@ -146,6 +216,7 @@
 
         /* STATUS */
 
+        .status,
         .current-status {
             display: inline-block;
             padding: 7px 14px;
@@ -153,6 +224,11 @@
             background: linear-gradient(135deg, #fef3c7, #fde68a);
             color: #92400e;
             font-weight: bold;
+        }
+
+        .status.resolved {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
         }
 
         /* FORM */
@@ -483,6 +559,19 @@
 
             No image uploaded for this complaint.
 
+        </div>
+
+    </div>
+
+
+    <!-- USER FEEDBACK -->
+
+    <div class="card">
+
+        <h2>User Feedback</h2>
+
+        <div class="empty-state" id="feedbackSummary">
+            Loading feedback...
         </div>
 
     </div>

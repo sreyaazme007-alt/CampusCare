@@ -91,6 +91,32 @@
         const form = document.getElementById("trackForm");
         if (!form) return;
 
+        const feedbackBox = document.getElementById("feedbackBox");
+        const feedbackRating = document.getElementById("feedbackRating");
+        const feedbackText = document.getElementById("feedbackText");
+        const feedbackMessage = document.getElementById("feedbackMessage");
+        const feedbackButton = document.getElementById("submitFeedback");
+
+        const saveFeedback = async () => {
+            const complaintId = document.getElementById("complaintId").value.trim();
+            if (!complaintId) return;
+            const supabase = getClient();
+            const { error } = await supabase.from("complaint_feedback").insert({
+                complaint_id: complaintId,
+                rating: feedbackRating.value,
+                comment: feedbackText.value.trim() || null
+            });
+            if (error) {
+                feedbackMessage.textContent = error.message || "Could not save feedback.";
+                feedbackMessage.style.display = "block";
+                return;
+            }
+            feedbackMessage.textContent = "Feedback saved successfully.";
+            feedbackMessage.style.display = "block";
+        };
+
+        feedbackButton.addEventListener("click", saveFeedback);
+
         const linkedId = new URLSearchParams(window.location.search).get("id");
         if (linkedId) document.getElementById("complaintId").value = linkedId;
 
@@ -100,6 +126,8 @@
             const errorMessage = document.getElementById("errorMessage");
             result.style.display = "none";
             errorMessage.style.display = "none";
+            feedbackBox.style.display = "none";
+            feedbackMessage.style.display = "none";
             try {
                 const { data, error } = await getClient().rpc("track_complaint", {
                     complaint_id_input: document.getElementById("complaintId").value.trim()
@@ -117,6 +145,10 @@
                 document.getElementById("displayStatus").textContent = complaint.status;
                 document.getElementById("displayUpdated").textContent = formatDate(complaint.updated_at);
                 result.style.display = "block";
+
+                if (complaint.status === "Resolved") {
+                    feedbackBox.style.display = "block";
+                }
             } catch (error) {
                 errorMessage.textContent = error.message || "Could not look up this complaint.";
                 errorMessage.style.display = "block";
@@ -188,16 +220,123 @@
                 const { data, error } = await getClient().rpc("list_resolved_complaints");
                 if (error) throw error;
                 if (!data.length) {
-                    list.innerHTML = "<h2>Resolved Complaints</h2><p>No resolved complaints yet.</p>";
+                    list.innerHTML = "<h2>Resolved Complaints</h2><div class='empty-state'>No completed complaints have been submitted yet.</div>";
                 } else {
-                    list.innerHTML = `<h2>Resolved Complaints</h2><table><thead><tr><th>Complaint ID</th><th>Category</th><th>Submitted</th><th>Status</th></tr></thead><tbody>${data.map((complaint) => `
-                        <tr>
-                            <td><a href="complaint-status.html?id=${encodeURIComponent(complaint.complaint_id)}">${escapeHtml(complaint.complaint_id)}</a></td>
-                            <td>${escapeHtml(complaint.category)}</td>
-                            <td>${formatDate(complaint.submitted_at)}</td>
-                            <td>Resolved</td>
-                        </tr>
-                    `).join("")}</tbody></table>`;
+                    list.innerHTML = `<h2>Resolved Complaints</h2>
+                        <div class="feedback-card">
+                            <form class="feedback-form" id="resolvedFeedbackForm">
+                                <div class="field-group">
+                                    <label for="resolvedComplaintId">Complaint ID</label>
+                                    <select id="resolvedComplaintId">${data.map((complaint) => `
+                                        <option value="${escapeHtml(complaint.complaint_id)}">${escapeHtml(complaint.complaint_id)}</option>
+                                    `).join("")}</select>
+                                </div>
+
+                                <div class="field-group">
+                                    <label>Current Status</label>
+                                    <div class="status-pill">Resolved</div>
+                                </div>
+
+                                <div class="field-group">
+                                    <label for="resolvedCategory">Category</label>
+                                    <input id="resolvedCategory" value="${escapeHtml(data[0].category || "")}" readonly>
+                                </div>
+
+                                <div class="field-group">
+                                    <label for="resolvedRemarks">Authority Remarks</label>
+                                    <textarea id="resolvedRemarks" readonly>${escapeHtml(data[0].authority_remarks || "No remarks provided.")}</textarea>
+                                </div>
+
+                                <div class="field-group">
+                                    <label for="resolvedRating">How satisfied are you?</label>
+                                    <select id="resolvedRating">
+                                        <option value="Very Satisfied">Very Satisfied</option>
+                                        <option value="Satisfied">Satisfied</option>
+                                        <option value="Neutral">Neutral</option>
+                                        <option value="Needs Improvement">Needs Improvement</option>
+                                    </select>
+                                </div>
+
+                                <div class="field-group">
+                                    <label for="resolvedFeedback">Your feedback</label>
+                                    <textarea id="resolvedFeedback" placeholder="Tell us how we handled your complaint..."></textarea>
+                                </div>
+
+                                <button type="submit">Submit Feedback</button>
+                            </form>
+
+                            <div style="margin-top:22px; border-top:1px solid #e2e8f0; padding-top:18px;">
+                                <h3 style="margin-bottom:12px; color:#1e293b;">Received Feedback</h3>
+                                <div id="feedbackPreview" style="display:grid; gap:12px;"></div>
+                            </div>
+                        </div>`;
+
+                    const resolvedFeedbackForm = document.getElementById("resolvedFeedbackForm");
+                    const resolvedComplaintId = document.getElementById("resolvedComplaintId");
+                    const resolvedCategory = document.getElementById("resolvedCategory");
+                    const resolvedRemarks = document.getElementById("resolvedRemarks");
+                    const feedbackPreview = document.getElementById("feedbackPreview");
+
+                    const renderFeedbackPreview = async (complaintId) => {
+                        const { data: feedbackRows, error } = await getClient()
+                            .from("complaint_feedback")
+                            .select("*")
+                            .eq("complaint_id", complaintId)
+                            .order("created_at", { ascending: false });
+
+                        if (error) {
+                            feedbackPreview.innerHTML = `<div class="empty-state">Unable to load feedback: ${escapeHtml(error.message || "Unknown database error")}</div>`;
+                            return;
+                        }
+
+                        if (!feedbackRows.length) {
+                            feedbackPreview.innerHTML = `<div class="empty-state">No feedback submitted for this complaint yet.</div>`;
+                            return;
+                        }
+
+                        feedbackPreview.innerHTML = feedbackRows.map((feedback) => `
+                            <div style="padding:12px 14px; border:1px solid #e2e8f0; border-radius:10px; background:#f8fafc;">
+                                <div style="font-weight:700; margin-bottom:6px;">Rating: ${escapeHtml(feedback.rating)}</div>
+                                <div style="color:#475569; margin-bottom:6px;">${escapeHtml(feedback.comment || "No comment provided.")}</div>
+                                <div style="font-size:12px; color:#64748b;">Submitted: ${formatDate(feedback.created_at)}</div>
+                            </div>
+                        `).join("");
+                    };
+
+                    const applySelectedComplaint = async () => {
+                        const selected = data.find((complaint) => complaint.complaint_id === resolvedComplaintId.value) || data[0];
+                        resolvedCategory.value = selected.category || "";
+                        resolvedRemarks.value = selected.authority_remarks || "No remarks provided.";
+                        await renderFeedbackPreview(selected.complaint_id);
+                    };
+
+                    resolvedComplaintId.addEventListener("change", applySelectedComplaint);
+                    resolvedFeedbackForm.addEventListener("submit", async (event) => {
+                        event.preventDefault();
+                        const complaintId = resolvedComplaintId.value;
+                        const rating = document.getElementById("resolvedRating").value;
+                        const comment = document.getElementById("resolvedFeedback").value.trim() || null;
+
+                        const { error } = await getClient().from("complaint_feedback").insert({
+                            complaint_id: complaintId,
+                            rating,
+                            comment
+                        });
+                        if (error) {
+                            alert(error.message || "Could not save feedback.");
+                            return;
+                        }
+
+                        document.getElementById("resolvedFeedback").value = "";
+                        await renderFeedbackPreview(complaintId);
+                        const current = document.getElementById("resolvedRating");
+                        if (current) {
+                            current.selectedIndex = 0;
+                        }
+                        alert("Thank you for your feedback.");
+                    });
+
+                    applySelectedComplaint();
                 }
             } catch (error) {
                 list.innerHTML = `<h2>Resolved Complaints</h2><p>${escapeHtml(error.message || "Could not load resolved complaints.")}</p>`;
@@ -258,6 +397,25 @@
             }
 
             document.querySelectorAll(".main > .card").forEach((card) => card.style.display = "block");
+
+            const feedbackSummary = document.getElementById("feedbackSummary");
+            const { data: feedbackRows, error: feedbackError } = await supabase.from("complaint_feedback")
+                .select("*")
+                .eq("complaint_id", complaint.id)
+                .order("created_at", { ascending: false });
+            if (feedbackError) {
+                feedbackSummary.textContent = "Unable to load feedback.";
+            } else if (!feedbackRows.length) {
+                feedbackSummary.textContent = "No user feedback submitted for this complaint yet.";
+            } else {
+                feedbackSummary.innerHTML = feedbackRows.map((feedback) => `
+                    <div style="padding:12px 0;border-bottom:1px solid #e2e8f0;">
+                        <div style="font-weight:700;margin-bottom:6px;">Rating: ${escapeHtml(feedback.rating)}</div>
+                        <div style="color:#475569;margin-bottom:6px;">${escapeHtml(feedback.comment || "No comment provided.")}</div>
+                        <div style="font-size:12px;color:#64748b;">Submitted: ${formatDate(feedback.created_at)}</div>
+                    </div>
+                `).join("");
+            }
 
             form.addEventListener("submit", async (event) => {
                 event.preventDefault();
@@ -389,7 +547,9 @@
             }
             const { data, error } = await supabase.from("complaints").select("*").order("created_at", { ascending: false });
             if (error) throw error;
+            complaints.length = 0;
             complaints.push(...data);
+            window.__campuscareComplaints = complaints;
             renderTable();
             updateStatistics();
         } catch (error) {

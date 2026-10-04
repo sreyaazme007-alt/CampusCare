@@ -5,12 +5,6 @@ create table if not exists public.authority_users (
 
 alter table public.authority_users enable row level security;
 
-create policy "Authorities can read their own role"
-on public.authority_users
-for select
-to authenticated
-using (user_id = (select auth.uid()));
-
 create or replace function public.is_authority()
 returns boolean
 language sql
@@ -48,10 +42,38 @@ create table if not exists public.complaints (
     updated_at timestamptz not null default now()
 );
 
+create table if not exists public.complaint_feedback (
+    id uuid primary key default gen_random_uuid(),
+    complaint_id uuid not null references public.complaints (id) on delete cascade,
+    rating text not null,
+    comment text,
+    created_at timestamptz not null default now()
+);
+
+create index if not exists complaint_feedback_complaint_id_idx
+on public.complaint_feedback (complaint_id);
+
 create index if not exists complaints_created_at_idx
 on public.complaints (created_at desc);
 
 alter table public.complaints enable row level security;
+alter table public.complaint_feedback enable row level security;
+
+drop policy if exists "Authorities can read complaint feedback" on public.complaint_feedback;
+
+drop policy if exists "Anyone can submit complaint feedback" on public.complaint_feedback;
+
+create policy "Anyone can submit complaint feedback"
+on public.complaint_feedback
+for insert
+to anon, authenticated
+with check (true);
+
+create policy "Anyone can read complaint feedback"
+on public.complaint_feedback
+for select
+to anon, authenticated
+using (true);
 
 create policy "Anyone can submit a complaint"
 on public.complaints
@@ -97,15 +119,42 @@ grant execute on function public.track_complaint(uuid) to anon, authenticated;
 create or replace function public.list_resolved_complaints()
 returns table (
     complaint_id uuid,
+    role text,
+    name text,
+    identifier text,
+    department text,
+    semester text,
+    class_name text,
+    designation text,
+    phone text,
     category text,
-    submitted_at timestamptz
+    description text,
+    status text,
+    authority_remarks text,
+    submitted_at timestamptz,
+    updated_at timestamptz
 )
 language sql
 stable
 security definer
 set search_path = public, pg_temp
 as $$
-    select c.id, c.category, c.created_at
+    select
+        c.id,
+        c.role,
+        c.name,
+        c.identifier,
+        c.department,
+        c.semester,
+        c.class_name,
+        c.designation,
+        c.phone,
+        c.category,
+        c.description,
+        c.status,
+        c.authority_remarks,
+        c.created_at,
+        c.updated_at
     from public.complaints as c
     where c.status = 'Resolved'
     order by c.created_at desc;
